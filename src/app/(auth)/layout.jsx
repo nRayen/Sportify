@@ -9,7 +9,7 @@ export const metadata = {
 export default function AuthLayout({ children }) {
 	return (
 		<div className="min-h-screen w-full relative flex justify-center items-center">
-			<main className="z-10 flex justify-center flex-col items-center h-fit p-5 relative my-auto">
+			<main className="z-10 flex justify-center flex-col items-center h-fit p-5 relative my-auto max-w-[552px] w-full">
 				<LogoSVG className="fill-primary"/>
 				<h1 className="text-4xl font-medium mb-14 mt-6">Sportify</h1>
 				{children}
