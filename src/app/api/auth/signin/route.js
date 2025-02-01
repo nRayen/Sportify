@@ -1,11 +1,21 @@
 import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prisma";
+import { LoginSchema } from "@/app/libs/zod";
 
 const bcrypt = require('bcrypt')
 
 // Route pour vérifier les informations de connexion
 export async function POST(request) {
     const {userLogin, password} = await request.json()
+
+
+    // Validation formulaire
+    const validation = LoginSchema.safeParse({userLogin, password})
+    if (!validation.success) {
+        return NextResponse.json(
+            {error : "Formulaire non valide", code : 400},
+            {status : 400}) // Code HTTP : BAD_REQUEST
+    }
 
     try {
         // Vérifier si le login est bon et récupérer le mdp

@@ -11,12 +11,14 @@ import { LoginSchema } from "@/app/libs/zod";
 
 const SignInForm = () => {
     const [errorList, setErrorList] = useState({})
+    const [failedLogin, setFailedLogin] = useState(false)
     const [showPassword, setShowPassword] = useState(true)
 
     const [userLogin, setUserLogin] = useState("")
     const [password, setPassword] = useState("")
 
     const handleSubmit = async (e) => {
+        setFailedLogin(false)
         e.preventDefault();
 
         // Récupération infos de login
@@ -51,7 +53,11 @@ const SignInForm = () => {
 
             // Ajout de l'erreur à l'affichage
             if (!response.ok) {
-                setErrorList([...errorList, res.error])
+                if (response.status == 401) {
+                    setErrorList({...errorList, failedLogin : true})
+                } else if (response.status == 500) {
+                    setErrorList({...errorList, serverError : true})
+                }
             } else {
                 alert("Réussite : Implémentation email confirmation")
             }
@@ -73,7 +79,6 @@ const SignInForm = () => {
                     <div className="w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
                         <PseudoSVG className="h-full"/>
                         <input value={userLogin} onFocus={() => setErrorList({...errorList, userLogin: undefined})} onChange={(e) => setUserLogin(e.target.value)} type="text" name="userLogin" id="user-login" placeholder="Pseudo" required className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary" />
-                        {}
                     </div>
                     {errorList.userLogin && <FormError error={errorList.userLogin}/>}
                 </section>
@@ -97,6 +102,8 @@ const SignInForm = () => {
                             }
                         </button>
                     </div>
+                    {errorList.failedLogin && <FormError>Nom d'utilisateur ou mot de passe incorrect</FormError>}
+                    {errorList.serverError && <FormError>Erreur lors de l'authentification. Veuillez réessayer</FormError>}
                     {errorList.password && <FormError error={errorList.password}/>}
                 </section>
 
