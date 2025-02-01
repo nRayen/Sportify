@@ -2,7 +2,7 @@ import React from 'react'
 
 const AppHome = () => {
   return (
-    <h1>AppHome</h1>
+    <h1 className='text-7xl m-auto'>AppHome</h1>
   )
 }
 

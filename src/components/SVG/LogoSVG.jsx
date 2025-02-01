@@ -11,8 +11,8 @@ const LogoSVG = ({ className }) => {
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<path
-				fill-rule="evenodd"
-				clip-rule="evenodd"
+				fillRule="evenodd"
+				clipRule="evenodd"
 				d="M20 40C31.0457 40 40 31.0457 40 20C40 8.9543 31.0457 0 20 0C8.9543 0 0 8.9543 0 20C0 31.0457 8.9543 40 20 40ZM20 40C20 25 33.3333 20 40 20C25 20 20 6.66667 20 0C20 15 6.66667 20 0 20C15 20 20 33.3333 20 40Z"
 			/>
 		</svg>
