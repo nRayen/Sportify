@@ -1,11 +1,20 @@
 import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prisma";
+import { RegisterSchema } from "@/app/libs/zod";
 
 const bcrypt = require('bcrypt')
 
 // Route pour créer un USER
 export async function POST(request) {
     const {pseudo, firstname, lastname, email, password, birthday, sex} = await request.json()
+
+    // Validation données
+    const validation = RegisterSchema.safeParse({pseudo, firstname, lastname, email, password, birthday, sex})
+    if (!validation.success) {
+        return NextResponse.json(
+            {error : "Formulaire non valide", code : 400},
+            {status : 400}) // Code HTTP : BAD_REQUEST
+    }
 
     // Vérifier si le pseudo existe
     const existingPseudoCheck = await prisma.uSERS.findUnique({
@@ -15,7 +24,7 @@ export async function POST(request) {
     })
     if(existingPseudoCheck) {
         return NextResponse.json(
-            {error : "Pseudo déjà utilisé", code : 409},
+            {error : "PSEUDO_TAKEN", code : 409, field : "pseudo"},
             {status : 409}) // Code HTTP : CONFLICT
     }
 
@@ -27,7 +36,7 @@ export async function POST(request) {
     })
     if(existingEmailCheck) {
         return NextResponse.json(
-            {error : "Email déjà utilisé", code : 409},
+            {error : "EMAIL_TAKEN", code : 409, field : "email"},
             {status : 409}) // Code HTTP : CONFLICT
     }
 

@@ -67,8 +67,16 @@ const SignUpForm = () => {
 
             // Ajout de l'erreur à l'affichage
             if (!response.ok) {
-                // setErrorList([...errorList, res.error])
-                alert(erreur)
+                if (response.status == 409) {
+                    if (res.error == "PSEUDO_TAKEN") {
+                        setErrorList({...errorList, pseudo : "Pseudo déjà utilisé"})
+                    } else if (res.error == "EMAIL_TAKEN" ) {
+                        setErrorList({...errorList, email : "Email déjà utilisé"})
+                    }
+                } else if (response.status == 500) {
+                    setErrorList({...errorList, serverError : true})
+                }
+                console.log(errorList)
             } else {
                 alert("Réussite : Implémentation email confirmation")
             }
@@ -143,6 +151,7 @@ const SignUpForm = () => {
                     </button>
                 </div>
                 {errorList.password && <FormError error={errorList.password}/>}
+                {errorList.serverError && <FormError>Erreur lors de l'authentification. Veuillez réessayer</FormError>}
             </section>
 
             {/* Bouton submit */}

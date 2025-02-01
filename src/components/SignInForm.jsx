@@ -11,7 +11,6 @@ import { LoginSchema } from "@/app/libs/zod";
 
 const SignInForm = () => {
     const [errorList, setErrorList] = useState({})
-    const [failedLogin, setFailedLogin] = useState(false)
     const [showPassword, setShowPassword] = useState(true)
 
     const [userLogin, setUserLogin] = useState("")
