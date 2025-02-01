@@ -7,25 +7,36 @@ import PasswordSVG from "./SVG/PasswordSVG";
 import PseudoSVG from "./SVG/PseudoSVG";
 import EyeOpenSVG from "./SVG/EyeOpenSVG";
 import EyeClosedSVG from "./SVG/EyeClosedSVG";
+import { LoginSchema } from "@/app/libs/zod";
 
 const SignInForm = () => {
-    const [errorList, setErrorList] = useState([])
-    const [showPassword, setShowPassword] = useState(false)
+    const [errorList, setErrorList] = useState({})
+    const [showPassword, setShowPassword] = useState(true)
 
     const [userLogin, setUserLogin] = useState("")
     const [password, setPassword] = useState("")
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(errorList);
-
-        setErrorList(new Array(0))
 
         // Récupération infos de login
         const loginInfo = {
             userLogin: userLogin.trim(),
             password: password.trim(),
         }
+
+        // Validation formulaire
+        const validation = LoginSchema.safeParse(loginInfo)
+
+        if (!validation.success) {
+            const errors = {}
+            validation.error.errors.forEach((err) => {
+                errors[err.path[0]] = err.message
+            })
+            setErrorList(errors)
+            return
+        }
+
 
         // Requête API pour se connecter
         try {
@@ -53,16 +64,18 @@ const SignInForm = () => {
 
     return (
 
-        <form onSubmit={handleSubmit} className="min-w-full rounded-xl my-auto sm:px-10 sm:py-8 sm:bg-white/10 sm:stroke-white/5">
+        <form onSubmit={handleSubmit} noValidate className="min-w-full rounded-xl my-auto sm:px-10 sm:py-8 sm:bg-white/10 sm:stroke-white/5">
             <div className="flex flex-col gap-4 w-full">
 
                 {/* User */}
                 <section className="flex flex-col gap-2">
                     <label htmlFor="user-login">Pseudo</label>
-                    <div className="group w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
+                    <div className="w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
                         <PseudoSVG className="h-full"/>
-                        <input value={userLogin} onChange={(e) => setUserLogin(e.target.value)} type="text" name="userLogin" id="user-login" placeholder="Pseudo" required className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary" />
+                        <input value={userLogin} onFocus={() => setErrorList({...errorList, userLogin: undefined})} onChange={(e) => setUserLogin(e.target.value)} type="text" name="userLogin" id="user-login" placeholder="Pseudo" required className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary" />
+                        {}
                     </div>
+                    {errorList.userLogin && <FormError error={errorList.userLogin}/>}
                 </section>
 
                 {/* Mot de passe */}
@@ -71,9 +84,9 @@ const SignInForm = () => {
                         <label htmlFor="password">Mot de passe</label>
                         <Link href={"/forgot-pwd"} className="text-sm text-primary hover:underline">Mot de passe oublié</Link>
                     </div>
-                    <div className="group w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
+                    <div className="w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
                         <PasswordSVG className="h-full"/>
-                        <input value={password} onChange={(e) => setPassword(e.target.value)} type={showPassword ? "password" : "text"} name="password" id="password" placeholder="Mot de passe" required className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary" />
+                        <input value={password} onFocus={() => setErrorList({...errorList, password: undefined})} onChange={(e) => setPassword(e.target.value)} type={showPassword ? "password" : "text"} name="password" id="password" placeholder="Mot de passe" required className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary" />
                         <button type="button" onClick={() => setShowPassword(!showPassword)}>
                             {
                                 showPassword ? (
@@ -84,6 +97,7 @@ const SignInForm = () => {
                             }
                         </button>
                     </div>
+                    {errorList.password && <FormError error={errorList.password}/>}
                 </section>
 
                 {/* Connexion */}

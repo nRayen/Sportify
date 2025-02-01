@@ -11,9 +11,10 @@ import EmailSVG from "./SVG/EmailSVG";
 import EyeSVG from "./SVG/EyeClosedSVG";
 import EyeOpenSVG from "./SVG/EyeOpenSVG";
 import EyeClosedSVG from "./SVG/EyeClosedSVG";
+import { RegisterSchema } from "@/app/libs/zod";
 
 const SignUpForm = () => {
-    const [errorList, setErrorList] = useState([])
+    const [errorList, setErrorList] = useState({})
 
     const [pseudo, setPseudo] = useState("")
     const [firstname, setFirstname] = useState("")
@@ -27,7 +28,6 @@ const SignUpForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setErrorList([])
 
         // Récupération données formulaire
         const newUser = {
@@ -40,6 +40,19 @@ const SignUpForm = () => {
             sex : sex || null
         }
 
+
+        // Validation formulaire
+        const validation = RegisterSchema.safeParse(newUser)
+
+        if (!validation.success) {
+            const errors = {}
+            validation.error.errors.forEach((err) => {
+                errors[err.path[0]] = err.message
+            })
+            setErrorList(errors)
+            console.log(errorList)
+            return
+        }
 
         // Requête API pour créer l'utilisateur
         try {
@@ -54,7 +67,8 @@ const SignUpForm = () => {
 
             // Ajout de l'erreur à l'affichage
             if (!response.ok) {
-                setErrorList([...errorList, res.error])
+                // setErrorList([...errorList, res.error])
+                alert(erreur)
             } else {
                 alert("Réussite : Implémentation email confirmation")
             }
@@ -66,32 +80,38 @@ const SignUpForm = () => {
 
   return (
 
-    <form className="max-w-[512px] w-full rounded-xl my-auto sm:px-10 sm:py-8 sm:bg-white/10 sm:stroke-white/5" onSubmit={handleSubmit}>
+    <form className="max-w-[512px] w-full rounded-xl my-auto sm:px-10 sm:py-8 sm:bg-white/10 sm:stroke-white/5" onSubmit={handleSubmit} noValidate>
         <div className="flex flex-col gap-4" >
-            
+
             {/* Nom + Prénom */}
             <section className="grid grid-cols-2 gap-x-3 gap-y-2">
                 <label htmlFor="firstname">Prénom</label>
                 <label htmlFor="lastname">Nom</label>
 
-                <div className="group w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
+                <div className="relative group w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
                     <FirstnameSVG className="h-full"/>
-                    <input value={firstname} onChange={(e) => setFirstname(e.target.value)} type="text" name="firstname" id="firstname" placeholder="Prénom" required className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary" />
+                    <input value={firstname} onFocus={() => setErrorList({...errorList, firstname: undefined})} onChange={(e) => setFirstname(e.target.value)} type="text" name="firstname" id="firstname" placeholder="Prénom" required className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary" />
                 </div>
 
                 <div className="group w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
                     <LastnameSVG className="h-full"/>
-                    <input value={lastname} onChange={(e) => setLastname(e.target.value)} type="text" name="lastname" id="lastname" placeholder="Nom" required className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary" />
+                    <input value={lastname} onFocus={() => setErrorList({...errorList, lastname: undefined})} onChange={(e) => setLastname(e.target.value)} type="text" name="lastname" id="lastname" placeholder="Nom" required className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary" />
                 </div>
+                {(errorList.firstname || errorList.lastname) &&
+                <FormError className={"col-span-2"} error={errorList.firstname || errorList.lastname}/>}
             </section>
+
+
+
 
             {/* Pseudo */}
             <section className="flex flex-col gap-2">
                 <label htmlFor="pseudo">Pseudo</label>
                 <div className="group w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
                     <PseudoSVG className="h-full"/>
-                    <input value={pseudo} onChange={(e) => setPseudo(e.target.value)} type="text" name="pseudo" id="pseudo" placeholder="Pseudo" required className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary" />
+                    <input value={pseudo} onFocus={() => setErrorList({...errorList, pseudo: undefined})} onChange={(e) => setPseudo(e.target.value)} type="text" name="pseudo" id="pseudo" placeholder="Pseudo" required className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary" />
                 </div>
+                {errorList.pseudo && <FormError error={errorList.pseudo}/>}
             </section>
 
 
@@ -100,8 +120,9 @@ const SignUpForm = () => {
                 <label htmlFor="email">Email</label>
                 <div className="group w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
                     <EmailSVG className="h-full"/>
-                    <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" name="email" id="email" placeholder="Email" required className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary" />
+                    <input value={email} onFocus={() => setErrorList({...errorList, email: undefined})} onChange={(e) => setEmail(e.target.value)} type="text" name="email" id="email" placeholder="Email" required className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary" />
                 </div>
+                {errorList.email && <FormError error={errorList.email}/>}
             </section>
 
 
@@ -110,7 +131,7 @@ const SignUpForm = () => {
                 <label htmlFor="password">Mot de passe</label>
                 <div className="group w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
                     <PasswordSVG className="h-full"/>
-                    <input value={password} onChange={(e) => setPassword(e.target.value)} type={showPassword ? "password" : "text"} name="password" id="password" placeholder="Mot de passe" required className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary" />
+                    <input value={password} onFocus={() => setErrorList({...errorList, password: undefined})} onChange={(e) => setPassword(e.target.value)} type={showPassword ? "password" : "text"} name="password" id="password" placeholder="Mot de passe" required className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary" />
                     <button type="button" onClick={() => setShowPassword(!showPassword)}>
                         {
                             showPassword ? (
@@ -121,8 +142,7 @@ const SignUpForm = () => {
                         }
                     </button>
                 </div>
-                <div className="text-secondary">Robustesse du mot de passe</div>
-                <div className="w-full h-0.5 bg-white"></div>
+                {errorList.password && <FormError error={errorList.password}/>}
             </section>
 
             {/* Bouton submit */}
@@ -132,7 +152,7 @@ const SignUpForm = () => {
             <p className="text-sm text-text-secondary">En créant un compte, vous acceptez les <Link href={"/tos"} className="text-white underline">Conditions d'utilisation</Link>. Nous vous enverrons occasionnellement des e-mails liés à votre compte </p>
         </div>
 
-        {/* Login */}
+        {/* Login button */}
         <p className="text-sm text-center mt-8">Vous avez déjâ un compte ? <Link className="text-primary hover:underline" href={"/signin"}>Connexion</Link></p>
     </form>
   )

@@ -16,13 +16,12 @@ export default {
           DEFAULT: "#FFFFFF"
         },
         primary: {
-          // DEFAULT: "#ECF15E"
           DEFAULT: "#4CAF50"
-          // DEFAULT: "#FF2200"
         },
         text: {
           primary: "#FFFFFF",
-          secondary: "#8996A9"
+          secondary: "#8996A9",
+          error: ""
         }
       },
       fontFamily: {
