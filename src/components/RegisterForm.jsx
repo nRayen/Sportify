@@ -8,12 +8,11 @@ import LastnameSVG from "./SVG/LastnameSVG";
 import PseudoSVG from "./SVG/PseudoSVG";
 import PasswordSVG from "./SVG/PasswordSVG";
 import EmailSVG from "./SVG/EmailSVG";
-import EyeSVG from "./SVG/EyeClosedSVG";
 import EyeOpenSVG from "./SVG/EyeOpenSVG";
 import EyeClosedSVG from "./SVG/EyeClosedSVG";
 import { RegisterSchema } from "@/app/libs/zod";
 
-const SignUpForm = () => {
+const RegisterForm = () => {
     const [errorList, setErrorList] = useState({})
 
     const [pseudo, setPseudo] = useState("")
@@ -56,7 +55,7 @@ const SignUpForm = () => {
 
         // Requête API pour créer l'utilisateur
         try {
-            const response = await fetch("/api/auth/signup", {
+            const response = await fetch("/api/auth/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -162,9 +161,9 @@ const SignUpForm = () => {
         </div>
 
         {/* Login button */}
-        <p className="text-sm text-center mt-8">Vous avez déjâ un compte ? <Link className="text-primary hover:underline" href={"/signin"}>Connexion</Link></p>
+        <p className="text-sm text-center mt-8">Vous avez déjâ un compte ? <Link className="text-primary hover:underline" href={"/login"}>Connexion</Link></p>
     </form>
   )
 }
 
-export default SignUpForm
+export default RegisterForm

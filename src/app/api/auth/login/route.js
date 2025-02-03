@@ -9,7 +9,7 @@ export async function POST(request) {
     const {userLogin, password} = await request.json()
 
 
-    // Validation formulaire
+    // Validation Zod formulaire
     const validation = LoginSchema.safeParse({userLogin, password})
     if (!validation.success) {
         return NextResponse.json(

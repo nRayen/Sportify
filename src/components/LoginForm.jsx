@@ -9,7 +9,7 @@ import EyeOpenSVG from "./SVG/EyeOpenSVG";
 import EyeClosedSVG from "./SVG/EyeClosedSVG";
 import { LoginSchema } from "@/app/libs/zod";
 
-const SignInForm = () => {
+const LoginForm = () => {
     const [errorList, setErrorList] = useState({})
     const [showPassword, setShowPassword] = useState(true)
 
@@ -18,6 +18,8 @@ const SignInForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setErrorList({...errorList, failedLogin:undefined, serverError : undefined})
+        console.log(errorList)
 
         // Récupération infos de login
         const loginInfo = {
@@ -40,7 +42,7 @@ const SignInForm = () => {
 
         // Requête API pour se connecter
         try {
-            const response = await fetch("/api/auth/signin", {
+            const response = await fetch("/api/auth/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -53,6 +55,8 @@ const SignInForm = () => {
             if (!response.ok) {
                 if (response.status == 401) {
                     setErrorList({...errorList, failedLogin : true})
+                    console.log(errorList);
+
                 } else if (response.status == 500) {
                     setErrorList({...errorList, serverError : true})
                 }
@@ -109,9 +113,10 @@ const SignInForm = () => {
                 <button type="submit" className="text-xl font-medium text-[#0E0F11] py-2 rounded-lg bg-gradient-to-b from-primary to-primary">Connexion</button>
 
             </div>
-            <p className="text-sm text-center mt-8">Vous n'avez pas de compte ? <Link className="text-primary hover:underline" href={"/signup"}>S'inscrire</Link></p>
+
+            <p className="text-sm text-center mt-8">Vous n'avez pas de compte ? <Link className="text-primary hover:underline" href={"/register"}>S'inscrire</Link></p>
         </form>
     )
 }
 
-export default SignInForm
+export default LoginForm
