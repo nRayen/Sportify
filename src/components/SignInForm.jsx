@@ -17,7 +17,6 @@ const SignInForm = () => {
     const [password, setPassword] = useState("")
 
     const handleSubmit = async (e) => {
-        setFailedLogin(false)
         e.preventDefault();
 
         // Récupération infos de login
