@@ -154,7 +154,7 @@ const RegisterForm = () => {
             </section>
 
             {/* Bouton submit */}
-            <button type="submit" className="text-2xl font-medium text-[#0E0F11] py-2 rounded-lg bg-gradient-to-b from-primary to-primary">S'inscrire</button>
+            <button type="submit" className="text-xl font-medium text-[#0E0F11] py-2 rounded-lg bg-gradient-to-b from-primary to-primary">S'inscrire</button>
 
             {/* ToS */}
             <p className="text-sm text-text-secondary">En créant un compte, vous acceptez les <Link href={"/tos"} className="text-white underline">Conditions d'utilisation</Link>. Nous vous enverrons occasionnellement des e-mails liés à votre compte </p>
