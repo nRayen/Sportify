@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/app/libs/prisma";
 import { LoginSchema } from "@/app/libs/zod";
+import { createSession } from "../../../libs/session";
 
 const bcrypt = require('bcrypt')
 
@@ -24,7 +25,8 @@ export async function POST(request) {
                     pseudo : userLogin,
                 },
             select : {
-                password : true
+                password : true,
+                id : true
             }
             })
 
@@ -42,6 +44,7 @@ export async function POST(request) {
 
         // Vérifier si on autorise la connexion
         if (passwordCheck && userLoginCheck) {
+            await createSession(userLoginCheck.id)
             return NextResponse.json(
                 { message: "Bons identifiants + ...Création session" },
                 { status: 201 } // Code HTTP : CREATION
