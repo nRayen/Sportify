@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/app/libs/prisma";
+import prisma from "@/app/libs/prisma";
 import { LoginSchema } from "@/app/libs/zod";
 import { createSession } from "../../../libs/session";
 
@@ -20,7 +20,7 @@ export async function POST(request) {
 
     try {
         // Vérifier si le login est bon et récupérer le mdp
-        const userLoginCheck = await prisma.uSERS.findUnique({
+        const userLoginCheck = await prisma.user.findUnique({
             where: {
                     pseudo : userLogin,
                 },
@@ -82,7 +82,7 @@ export async function POST(request) {
 
     // Création dans la base de données
     // try {
-    //     await prisma.uSERS.create({
+    //     await prisma.user.create({
     //         data : {
     //             pseudo,
     //             firstname,

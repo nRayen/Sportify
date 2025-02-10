@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model USERS {
+model User {
   id         Int       @id(map: "USER_pkey") @default(autoincrement())
   pseudo     String    @unique @db.VarChar(50)
   firstname  String    @db.VarChar(50)

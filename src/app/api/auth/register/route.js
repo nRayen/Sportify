@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/app/libs/prisma";
+import prisma from "@/app/libs/prisma";
 import { RegisterSchema } from "@/app/libs/zod";
 
 const bcrypt = require('bcrypt')
@@ -17,7 +17,7 @@ export async function POST(request) {
     }
 
     // Vérifier si le pseudo existe
-    const existingPseudoCheck = await prisma.uSERS.findUnique({
+    const existingPseudoCheck = await prisma.user.findUnique({
         where: {
             pseudo : pseudo
         }
@@ -29,7 +29,7 @@ export async function POST(request) {
     }
 
     // Vérifier si le mail existe
-    const existingEmailCheck = await prisma.uSERS.findUnique({
+    const existingEmailCheck = await prisma.user.findUnique({
         where: {
             email : email
         }
@@ -45,7 +45,7 @@ export async function POST(request) {
 
     // Création dans la base de données
     try {
-        await prisma.uSERS.create({
+        await prisma.user.create({
             data : {
                 pseudo,
                 firstname,
