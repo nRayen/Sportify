@@ -28,3 +28,7 @@ body {
   align-items : center;
   min-height : 100vh;
 }
+
+html {
+  @apply transition-colors duration-500;
+}
