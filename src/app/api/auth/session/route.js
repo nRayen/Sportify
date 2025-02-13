@@ -1,10 +1,11 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server"
-import { decrypt } from "../../../libs/session";
+import { decrypt, getSession } from "../../../libs/session";
 
 // Méthode pour récupérer la session
 export async function GET() {
-    const session = (await cookies()).get('session')?.value
+    // const session = (await cookies()).get('session')?.value
+    const session = getSession()
 
     if (!session) {
         return NextResponse.json(

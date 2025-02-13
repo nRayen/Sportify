@@ -18,11 +18,18 @@ export default {
           DEFAULT : "#FFFFFF",
           dark: "#161616"
         },
+
+        backgroundItem: {
+          DEFAULT: "#F4F4F5",
+          dark: "#27272A"
+        },
+        
         foreground: {
           DEFAULT: "#FFFFFF"
         },
         primary: {
-          DEFAULT: "#4CAF50"
+          // DEFAULT: "#4CAF50"
+          DEFAULT: "#64D8CB"
         },
         text: {
           primary: {

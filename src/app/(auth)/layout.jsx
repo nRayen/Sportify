@@ -1,4 +1,3 @@
-import GridSVG from "@/components/SVG/GridSVG";
 import LogoSVG from "@/components/SVG/LogoSVG";
 
 export const metadata = {

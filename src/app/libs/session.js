@@ -47,7 +47,7 @@ export async function updateSession() {
 // Récuperer la session
 export async function getSession() {
   const session = (await cookies()).get('session')?.value
-  // const payload = await decrypt(session)
+  const payload = await decrypt(session)
   return payload
 }
 
