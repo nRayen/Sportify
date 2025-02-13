@@ -11,7 +11,12 @@ export default {
     extend: {
       colors: {
         background: {
-          DEFAULT: "#0E0F11"
+          DEFAULT : "#F5F4F7",
+          dark: "#0E0F11"
+        },
+        backgroundTone: {
+          DEFAULT : "#FFFFFF",
+          dark: "#161616"
         },
         foreground: {
           DEFAULT: "#FFFFFF"
@@ -20,7 +25,10 @@ export default {
           DEFAULT: "#4CAF50"
         },
         text: {
-          primary: "#FFFFFF",
+          primary: {
+            DEFAULT :"#000000",
+            dark: "#FFFFFF"
+          },
           secondary: "#8996A9",
           error: ""
         }

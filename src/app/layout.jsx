@@ -1,5 +1,6 @@
 import "./globals.css";
 import PageAnimation from "../components/PageAnimation";
+import Providers from "@/components/Providers";
 
 export const metadata = {
 	title: "Create Next App",
@@ -8,9 +9,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
 	return (
-		<html lang="fr">
-			<body className="font-montreal text-text-primary dark:bg-background">
-				<PageAnimation>{children}</PageAnimation>
+		<html lang="fr" className="htmltest">
+			<body className="font-montreal text-default bg-bgcolor">
+				<Providers>
+					<PageAnimation>{children}</PageAnimation>
+				</Providers>
 			</body>
 		</html>
 	);

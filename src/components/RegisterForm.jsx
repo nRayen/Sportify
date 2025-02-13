@@ -96,7 +96,7 @@ const RegisterForm = () => {
                 <label htmlFor="lastname">Nom</label>
 
                 <div className="relative group w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
-                    <FirstnameSVG className="h-full"/>
+                    <FirstnameSVG className="h-full stroke-black"/>
                     <input value={firstname} onFocus={() => setErrorList({...errorList, firstname: undefined})} onChange={(e) => setFirstname(e.target.value)} type="text" name="firstname" id="firstname" placeholder="Prénom" required className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary" />
                 </div>
 

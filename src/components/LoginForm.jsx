@@ -79,7 +79,7 @@ const LoginForm = () => {
                 <section className="flex flex-col gap-2">
                     <label htmlFor="user-login">Pseudo</label>
                     <div className="w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
-                        <PseudoSVG className="h-full"/>
+                        <PseudoSVG className="h-full stroke-black dark:stroke-white"/>
                         <input value={userLogin} onFocus={() => setErrorList({...errorList, userLogin: undefined})} onChange={(e) => setUserLogin(e.target.value)} type="text" name="userLogin" id="user-login" placeholder="Pseudo" required className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary" />
                     </div>
                     {errorList.userLogin && <FormError error={errorList.userLogin}/>}
@@ -92,7 +92,7 @@ const LoginForm = () => {
                         <Link href={"/forgot-pwd"} className="text-sm text-primary hover:underline">Mot de passe oublié</Link>
                     </div>
                     <div className="w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
-                        <PasswordSVG className="h-full"/>
+                        <PasswordSVG className="h-full stroke-black dark:stroke-white"/>
                         <input value={password} onFocus={() => setErrorList({...errorList, password: undefined})} onChange={(e) => setPassword(e.target.value)} type={showPassword ? "password" : "text"} name="password" id="password" placeholder="Mot de passe" required className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary" />
                         <button type="button" onClick={() => setShowPassword(!showPassword)}>
                             {
