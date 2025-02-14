@@ -1,10 +1,12 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const SessionContext = createContext();
 
 export const SessionProvider = ({ children }) => {
+	const router = useRouter()
 	const [session, setSession] = useState(null);
 
 
@@ -25,8 +27,27 @@ export const SessionProvider = ({ children }) => {
 	}, []);
 
 
+	// Déconnexion
+	const logout = () => {
+		async function deleteSession() {
+			const response = await fetch("/api/auth/session", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            const res = await response.json()
+			setSession(null)
+			return res
+		}
+		deleteSession().then(() => {
+			router.push('/login')
+		});
+	}
+
+
 	return (
-		<SessionContext.Provider value={{ session }}>
+		<SessionContext.Provider value={{ session, logout }}>
 			{children}
 		</SessionContext.Provider>
 	);

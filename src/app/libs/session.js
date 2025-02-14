@@ -82,7 +82,3 @@ export async function decrypt(session) {
     console.log('Failed to verify session')
   }
 }
-
-
-
-// Fonction logout

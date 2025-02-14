@@ -8,8 +8,10 @@ import PseudoSVG from "./SVG/PseudoSVG";
 import EyeOpenSVG from "./SVG/EyeOpenSVG";
 import EyeClosedSVG from "./SVG/EyeClosedSVG";
 import { LoginSchema } from "@/app/libs/zod";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+    const router = useRouter()
     const [errorList, setErrorList] = useState({})
     const [showPassword, setShowPassword] = useState(true)
 
@@ -62,6 +64,8 @@ const LoginForm = () => {
                 }
             } else {
                 alert("Réussite : Implémentation email confirmation")
+                router.push("/app")
+
             }
 
         } catch (error) {
