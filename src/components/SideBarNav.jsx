@@ -10,18 +10,11 @@ const SideBarNav = ({itemstyle}) => {
 
     // const path = usePathname()
     const [active, setActive] = useState(usePathname())
-    useEffect(() => {
-      return () => {
-
-      }
-      setActive(usePathname())
-    }, [])
-
 
 
     const nav = [
         {
-          link: "/app",
+          link: "/dashboard",
           text: "Acceuil",
           icon: Home,
         },

@@ -4,7 +4,9 @@ import { SessionProvider } from "../../hooks/useSession";
 const AppLayout = ({ children }) => {
 	return (
 		<div className="w-screen h-screen flex">
-			<main className="w-full"></main>
+			<main className="h-full w-full">
+				{children}
+			</main>
 			<SideBar />
 		</div>
 	);

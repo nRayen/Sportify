@@ -13,7 +13,7 @@ const SideBarProfile = async () => {
 					width={48}
 					height={48}
 					alt="avatar"
-					className="rounded-lg"
+					className="rounded-md"
 				/>
 				<div>
 					<p className="text-sm font-medium">{user.pseudo}</p>
