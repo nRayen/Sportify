@@ -85,7 +85,7 @@ const RegisterForm = () => {
 
 	return (
 		<form
-			className="max-w-[512px] w-full rounded-xl my-auto sm:px-10 sm:py-8 sm:bg-white/10 sm:stroke-white/5"
+			className="max-w-[512px] w-full rounded-xl my-auto sm:px-10 sm:py-8 sm:dark:bg-white/10 sm:dark:stroke-white/5 bg-backgroundTone border-[1px] border-black/5"
 			onSubmit={handleSubmit}
 			noValidate
 		>
@@ -95,8 +95,8 @@ const RegisterForm = () => {
 					<label htmlFor="firstname">Prénom</label>
 					<label htmlFor="lastname">Nom</label>
 
-					<div className="relative group w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
-						<FirstnameSVG className="h-full stroke-black" />
+					<div className="w-full flex dark:bg-white/10 border-[1px] dark:border-white/5 bg-bgcolor border-black/15 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
+						<FirstnameSVG className="h-full stroke-black dark:stroke-white" />
 						<input
 							value={firstname}
 							onFocus={() =>
@@ -108,12 +108,12 @@ const RegisterForm = () => {
 							id="firstname"
 							placeholder="Prénom"
 							required
-							className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary"
+							className="text-sm dark:placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary"
 						/>
 					</div>
 
-					<div className="group w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
-						<LastnameSVG className="h-full" />
+					<div className="group w-full flex dark:bg-white/10 border-[1px] dark:border-white/5 bg-bgcolor border-black/15 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
+						<LastnameSVG className="h-full stroke-black dark:stroke-white" />
 						<input
 							value={lastname}
 							onFocus={() =>
@@ -125,7 +125,7 @@ const RegisterForm = () => {
 							id="lastname"
 							placeholder="Nom"
 							required
-							className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary"
+							className="text-sm dark:placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary"
 						/>
 					</div>
 					{(errorList.firstname || errorList.lastname) && (
@@ -139,8 +139,8 @@ const RegisterForm = () => {
 				{/* Pseudo */}
 				<section className="flex flex-col gap-2">
 					<label htmlFor="pseudo">Pseudo</label>
-					<div className="group w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
-						<PseudoSVG className="h-full" />
+					<div className="group w-full flex dark:bg-white/10 border-[1px] dark:border-white/5 bg-bgcolor border-black/15 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
+						<PseudoSVG className="h-full stroke-black dark:stroke-white" />
 						<input
 							value={pseudo}
 							onFocus={() => setErrorList({ ...errorList, pseudo: undefined })}
@@ -150,7 +150,7 @@ const RegisterForm = () => {
 							id="pseudo"
 							placeholder="Pseudo"
 							required
-							className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary"
+							className="text-sm dark:placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary"
 						/>
 					</div>
 					{errorList.pseudo && <FormError error={errorList.pseudo} />}
@@ -159,8 +159,8 @@ const RegisterForm = () => {
 				{/* Email */}
 				<section className="flex flex-col gap-2">
 					<label htmlFor="email">Email</label>
-					<div className="group w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
-						<EmailSVG className="h-full" />
+					<div className="group w-full flex dark:bg-white/10 border-[1px] dark:border-white/5 bg-bgcolor border-black/15 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
+						<EmailSVG className="h-full stroke-black dark:stroke-white" />
 						<input
 							value={email}
 							onFocus={() => setErrorList({ ...errorList, email: undefined })}
@@ -170,7 +170,7 @@ const RegisterForm = () => {
 							id="email"
 							placeholder="Email"
 							required
-							className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary"
+							className="text-sm dark:placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary"
 						/>
 					</div>
 					{errorList.email && <FormError error={errorList.email} />}
@@ -179,8 +179,8 @@ const RegisterForm = () => {
 				{/* Mot de passe */}
 				<section className="flex flex-col gap-2">
 					<label htmlFor="password">Mot de passe</label>
-					<div className="group w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
-						<PasswordSVG className="h-full" />
+					<div className="group w-full flex dark:bg-white/10 border-[1px] dark:border-white/5 bg-bgcolor border-black/15 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
+						<PasswordSVG className="h-full stroke-black dark:stroke-white" />
 						<input
 							value={password}
 							onFocus={() =>
@@ -192,16 +192,16 @@ const RegisterForm = () => {
 							id="password"
 							placeholder="Mot de passe"
 							required
-							className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary"
+							className="text-sm dark:placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary"
 						/>
 						<button
 							type="button"
 							onClick={() => setShowPassword(!showPassword)}
 						>
 							{showPassword ? (
-								<EyeClosedSVG className="cursor-pointer hover:stroke-primary stroke-white" />
+								<EyeClosedSVG className="cursor-pointer hover:stroke-primary stroke-black dark:stroke-white" />
 							) : (
-								<EyeOpenSVG className="cursor-pointer hover:stroke-primary stroke-white" />
+								<EyeOpenSVG className="cursor-pointer hover:stroke-primary stroke-black dark:stroke-white" />
 							)}
 						</button>
 					</div>
@@ -224,7 +224,7 @@ const RegisterForm = () => {
 				{/* ToS */}
 				<p className="text-sm text-text-secondary">
 					En créant un compte, vous acceptez les{" "}
-					<Link href={"/tos"} className="text-white underline">
+					<Link href={"/tos"} className="text-default underline">
 						Conditions d'utilisation
 					</Link>
 					. Nous vous enverrons occasionnellement des e-mails liés à votre

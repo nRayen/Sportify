@@ -28,7 +28,9 @@ export default {
           DEFAULT: "#FFFFFF"
         },
         primary: {
-          DEFAULT: "#4CAF50"
+          // DEFAULT: "#4CAF50"
+          // DEFAULT: "#9B5DE5"
+          DEFAULT: "#10B981"
           // DEFAULT: "#64D8CB"
         },
         text: {

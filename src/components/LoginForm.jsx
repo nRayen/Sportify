@@ -9,6 +9,7 @@ import EyeOpenSVG from "./SVG/EyeOpenSVG";
 import EyeClosedSVG from "./SVG/EyeClosedSVG";
 import { LoginSchema } from "@/libs/zod";
 import { useRouter } from "next/navigation";
+import { KeyRound, LockKeyhole } from "lucide-react";
 
 const LoginForm = () => {
 	const router = useRouter();
@@ -77,13 +78,13 @@ const LoginForm = () => {
 		<form
 			onSubmit={handleSubmit}
 			noValidate
-			className="min-w-full rounded-xl my-auto sm:px-10 sm:py-8 sm:bg-white/10 sm:stroke-white/5"
+			className="min-w-full rounded-xl my-auto sm:px-10 sm:py-8 dark:sm:bg-white/10 sm:dark:stroke-white/5 bg-backgroundTone border-[1px] border-black/5"
 		>
 			<div className="flex flex-col gap-4 w-full">
 				{/* User */}
 				<section className="flex flex-col gap-2">
 					<label htmlFor="user-login">Pseudo</label>
-					<div className="w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
+					<div className="w-full flex dark:bg-white/10 border-[1px] dark:border-white/5 bg-bgcolor border-black/15 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
 						<PseudoSVG className="h-full stroke-black dark:stroke-white" />
 						<input
 							value={userLogin}
@@ -96,7 +97,7 @@ const LoginForm = () => {
 							id="user-login"
 							placeholder="Pseudo"
 							required
-							className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary"
+							className="text-sm dark:placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary"
 						/>
 					</div>
 					{errorList.userLogin && <FormError error={errorList.userLogin} />}
@@ -113,7 +114,7 @@ const LoginForm = () => {
 							Mot de passe oublié
 						</Link>
 					</div>
-					<div className="w-full flex bg-white/10 border-[1px] border-white/5 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
+					<div className="w-full flex dark:bg-white/10 border-[1px] dark:border-white/5 bg-bgcolor border-black/15 h-11 px-4 py-3 gap-3 rounded-md focus-within:border-b-primary transition-colors ease-in-out duration-500">
 						<PasswordSVG className="h-full stroke-black dark:stroke-white" />
 						<input
 							value={password}
@@ -126,7 +127,7 @@ const LoginForm = () => {
 							id="password"
 							placeholder="Mot de passe"
 							required
-							className="text-sm placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary"
+							className="text-sm dark:placeholder:text-white/30 bg-transparent disabled:pointer-events-none w-full focus:outline-none caret-primary"
 						/>
 						<button
 							type="button"
