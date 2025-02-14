@@ -8,8 +8,8 @@ import Link from 'next/link';
 
 const SideBarNav = ({itemstyle}) => {
 
-    // const path = usePathname()
-    const [active, setActive] = useState(usePathname())
+    const path = usePathname()
+    // const [active, setActive] = useState(usePathname())
 
 
     const nav = [
@@ -38,7 +38,7 @@ const SideBarNav = ({itemstyle}) => {
   return (
     <div className="flex gap-1 flex-col">
     {nav.map(({ link, text, icon }) => {
-      const activeLink = link === active
+      const activeLink = link === path
 
       return (
         <Link key={link} href={link} className={activeLink ? itemstyle+" text-primary" : itemstyle}>

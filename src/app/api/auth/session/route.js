@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server"
-import { decrypt, deleteSession, getSession } from "../../../libs/session";
+import { decrypt, deleteSession, getSession } from "../../../../libs/session";
 import { redirect } from "next/navigation";
 
 // Méthode pour récupérer la session

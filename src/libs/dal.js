@@ -3,8 +3,8 @@
 import 'server-only'
 
 import { cookies, headers } from 'next/headers'
-import { decrypt } from '@/app/libs/session'
-import prisma from "@/app/libs/prisma";
+import { decrypt } from '@/libs/session'
+import prisma from "@/libs/prisma";
 import { redirect } from 'next/navigation';
 
 export const verifySession = async () => {

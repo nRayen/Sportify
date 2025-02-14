@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
 		<html lang="fr" className="htmltest">
 			<body className="font-montreal text-default bg-bgcolor">
 				<Providers>
-					<PageAnimation>{children}</PageAnimation>
+					{children}
 				</Providers>
 			</body>
 		</html>

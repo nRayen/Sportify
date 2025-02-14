@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { decrypt } from '@/app/libs/session'
+import { decrypt } from '@/libs/session'
 import { cookies } from 'next/headers'
 
 // 1. Specify protected and public routes
@@ -25,9 +25,9 @@ export default async function middleware(req) {
   if (
     isPublicRoute &&
     session?.userId &&
-    !req.nextUrl.pathname.startsWith('/app')
+    !req.nextUrl.pathname.startsWith('/dashboard')
   ) {
-    return NextResponse.redirect(new URL('/app', req.nextUrl))
+    return NextResponse.redirect(new URL('/dashboard', req.nextUrl))
   }
 
   return NextResponse.next()

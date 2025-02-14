@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import prisma from "@/app/libs/prisma";
-import { LoginSchema } from "@/app/libs/zod";
-import { createSession } from "../../../libs/session";
+import prisma from "@/libs/prisma";
+import { LoginSchema } from "@/libs/zod";
+import { createSession } from "../../../../libs/session";
 
 const bcrypt = require('bcrypt')
 

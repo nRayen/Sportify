@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import prisma from "@/app/libs/prisma";
-import { RegisterSchema } from "@/app/libs/zod";
+import prisma from "@/libs/prisma";
+import { RegisterSchema } from "@/libs/zod";
 
 const bcrypt = require('bcrypt')
 
