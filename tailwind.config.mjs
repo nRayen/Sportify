@@ -35,7 +35,7 @@ export default {
         },
         text: {
           primary: {
-            DEFAULT :"#000000",
+            DEFAULT :"#161616",
             dark: "#FFFFFF"
           },
           secondary: "#8996A9",

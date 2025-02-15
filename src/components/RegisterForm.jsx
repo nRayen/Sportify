@@ -11,9 +11,12 @@ import EmailSVG from "./SVG/EmailSVG";
 import EyeOpenSVG from "./SVG/EyeOpenSVG";
 import EyeClosedSVG from "./SVG/EyeClosedSVG";
 import { RegisterSchema } from "@/libs/zod";
+import clsx from "clsx";
+import SideBarThemeSwitch from "./sidebar/SideBarThemeSwitch";
 
 const RegisterForm = () => {
 	const [errorList, setErrorList] = useState({});
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [pseudo, setPseudo] = useState("");
 	const [firstname, setFirstname] = useState("");
@@ -54,6 +57,10 @@ const RegisterForm = () => {
 
 		// Requête API pour créer l'utilisateur
 		try {
+
+			// Etat chargement
+			setIsLoading(true)
+
 			const response = await fetch("/api/auth/register", {
 				method: "POST",
 				headers: {
@@ -80,12 +87,14 @@ const RegisterForm = () => {
 			}
 		} catch (error) {
 			console.log(error.message);
+		} finally {
+			setIsLoading(false)
 		}
 	};
 
 	return (
 		<form
-			className="max-w-[512px] w-full rounded-xl my-auto sm:px-10 sm:py-8 sm:dark:bg-white/10 sm:dark:stroke-white/5 bg-backgroundTone border-[1px] border-black/5"
+			className="max-w-[512px] rounded-xl my-auto sm:px-10 sm:py-8 dark:sm:bg-white/10 sm:dark:stroke-white/5 sm:bg-backgroundTone sm:border-[1px] sm:border-black/5"
 			onSubmit={handleSubmit}
 			noValidate
 		>
@@ -199,9 +208,9 @@ const RegisterForm = () => {
 							onClick={() => setShowPassword(!showPassword)}
 						>
 							{showPassword ? (
-								<EyeClosedSVG className="cursor-pointer hover:stroke-primary stroke-black dark:stroke-white" />
+								<EyeClosedSVG className="cursor-pointer hover:stroke-primary dark:hover:stroke-primary stroke-black dark:stroke-white " />
 							) : (
-								<EyeOpenSVG className="cursor-pointer hover:stroke-primary stroke-black dark:stroke-white" />
+								<EyeOpenSVG className="cursor-pointer hover:stroke-primary dark:hover:stroke-primary stroke-black dark:stroke-white" />
 							)}
 						</button>
 					</div>
@@ -216,9 +225,10 @@ const RegisterForm = () => {
 				{/* Bouton submit */}
 				<button
 					type="submit"
-					className="text-xl font-medium text-[#0E0F11] py-2 rounded-lg bg-gradient-to-b from-primary to-primary"
+					disabled={isLoading}
+					className={clsx("text-xl font-medium text-[#0E0F11] py-2 rounded-lg bg-primary filter hover:opacity-80", {"filter opacity-80" : isLoading})}
 				>
-					S'inscrire
+					{isLoading ? "Chargement..." : "S'inscrire"}
 				</button>
 
 				{/* ToS */}
@@ -233,12 +243,15 @@ const RegisterForm = () => {
 			</div>
 
 			{/* Login button */}
-			<p className="text-sm text-center mt-8">
-				Vous avez déjâ un compte ?{" "}
-				<Link className="text-primary hover:underline" href={"/login"}>
-					Connexion
-				</Link>
-			</p>
+			<div className="flex items-center justify-between mt-4">
+				<p className="text-sm text-center ">
+					Vous avez déjà un compte ?{" "}
+					<Link className="text-primary hover:underline" href={"/login"}>
+						Se connecter
+					</Link>
+				</p>
+				<SideBarThemeSwitch className="hover:bg-background dark:hover:bg-background-dark p-2 rounded-full transition-colors ease-in-out duration-300"/>
+			</div>
 		</form>
 	);
 };

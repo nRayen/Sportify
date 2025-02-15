@@ -9,24 +9,28 @@ import EyeOpenSVG from "./SVG/EyeOpenSVG";
 import EyeClosedSVG from "./SVG/EyeClosedSVG";
 import { LoginSchema } from "@/libs/zod";
 import { useRouter } from "next/navigation";
-import { KeyRound, LockKeyhole } from "lucide-react";
+import SideBarThemeSwitch from "./sidebar/SideBarThemeSwitch";
+import clsx from "clsx";
 
 const LoginForm = () => {
 	const router = useRouter();
 	const [errorList, setErrorList] = useState({});
 	const [showPassword, setShowPassword] = useState(true);
 
+	const [isLoading, setIsLoading] = useState(false);
+
 	const [userLogin, setUserLogin] = useState("");
 	const [password, setPassword] = useState("");
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		// Erreurs à zéro
 		setErrorList({
 			...errorList,
 			failedLogin: undefined,
 			serverError: undefined,
 		});
-		console.log(errorList);
 
 		// Récupération infos de login
 		const loginInfo = {
@@ -46,8 +50,11 @@ const LoginForm = () => {
 			return;
 		}
 
-		// Requête API pour se connecter
 		try {
+			// Etat de chargement
+			setIsLoading(true);
+
+			// Requête API pour se connecter
 			const response = await fetch("/api/auth/login", {
 				method: "POST",
 				headers: {
@@ -56,21 +63,27 @@ const LoginForm = () => {
 				body: JSON.stringify(loginInfo),
 			});
 			const res = await response.json();
+			setIsLoading(false);
 
 			// Ajout de l'erreur à l'affichage
 			if (!response.ok) {
 				if (response.status == 401) {
 					setErrorList({ ...errorList, failedLogin: true });
-					console.log(errorList);
 				} else if (response.status == 500) {
 					setErrorList({ ...errorList, serverError: true });
 				}
 			} else {
-				alert("Réussite : Implémentation email confirmation");
-				router.push("/dashboard");
+				// alert("Réussite : Implémentation email confirmation");
+				alert("res")
+				try {
+					router.push("/dashboard")
+				} catch (error) {
+					console.log(error)
+				}
 			}
 		} catch (error) {
 			console.log(error.message);
+		} finally {
 		}
 	};
 
@@ -78,7 +91,7 @@ const LoginForm = () => {
 		<form
 			onSubmit={handleSubmit}
 			noValidate
-			className="min-w-full rounded-xl my-auto sm:px-10 sm:py-8 dark:sm:bg-white/10 sm:dark:stroke-white/5 bg-backgroundTone border-[1px] border-black/5"
+			className="min-w-full rounded-xl my-auto sm:px-10 sm:py-8 dark:sm:bg-white/10 sm:dark:stroke-white/5 sm:bg-backgroundTone sm:border-[1px] sm:border-black/5"
 		>
 			<div className="flex flex-col gap-4 w-full">
 				{/* User */}
@@ -134,9 +147,9 @@ const LoginForm = () => {
 							onClick={() => setShowPassword(!showPassword)}
 						>
 							{showPassword ? (
-								<EyeClosedSVG className="cursor-pointer hover:stroke-primary stroke-white" />
+								<EyeClosedSVG className="ursor-pointer hover:stroke-primary dark:hover:stroke-primary stroke-black dark:stroke-white" />
 							) : (
-								<EyeOpenSVG className="cursor-pointer hover:stroke-primary stroke-white" />
+								<EyeOpenSVG className="ursor-pointer hover:stroke-primary dark:hover:stroke-primary stroke-black dark:stroke-white" />
 							)}
 						</button>
 					</div>
@@ -154,18 +167,21 @@ const LoginForm = () => {
 				{/* Connexion */}
 				<button
 					type="submit"
-					className="text-xl font-medium text-[#0E0F11] py-2 rounded-lg bg-gradient-to-b from-primary to-primary"
+					disabled={isLoading}
+					className={clsx("text-xl font-medium text-[#0E0F11] py-2 rounded-lg bg-primary filter hover:opacity-80", {"filter opacity-80" : isLoading})}
 				>
-					Connexion
+					{isLoading ? "Chargement..." : "Connexion"}
 				</button>
 			</div>
-
-			<p className="text-sm text-center mt-8">
-				Vous n'avez pas de compte ?{" "}
-				<Link className="text-primary hover:underline" href={"/register"}>
-					S'inscrire
-				</Link>
-			</p>
+			<div className="flex items-center justify-between mt-4">
+				<p className="text-sm text-center ">
+					Vous n'avez pas de compte ?{" "}
+					<Link className="text-primary hover:underline" href={"/register"}>
+						S'inscrire
+					</Link>
+				</p>
+				<SideBarThemeSwitch className="hover:bg-background dark:hover:bg-background-dark p-2 rounded-full transition-colors ease-in-out duration-300"/>
+			</div>
 		</form>
 	);
 };
