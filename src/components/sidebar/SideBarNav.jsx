@@ -41,7 +41,7 @@ const SideBarNav = ({itemstyle}) => {
       const activeLink = link === path
 
       return (
-        <Link key={link} href={link} className={activeLink ? itemstyle+" text-primary" : itemstyle}>
+        <Link key={link} href={link} className={activeLink ? itemstyle+" text-primary bg-bgcolor" : itemstyle}>
           {React.createElement(icon, { strokeWidth: 1, size: 25 })}
           {text}
         </Link>

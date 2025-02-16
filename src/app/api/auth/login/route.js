@@ -46,7 +46,7 @@ export async function POST(request) {
         if (passwordCheck && userLoginCheck) {
             await createSession(userLoginCheck.id)
             return NextResponse.json(
-                { message: "Bons identifiants + ...Création session" },
+                { message: "Bons identifiants" },
                 { status: 201 } // Code HTTP : CREATION
             )
         } else {

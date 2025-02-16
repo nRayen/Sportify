@@ -32,8 +32,8 @@ const SideBar = ({ isOpen, setIsOpen }) => {
 
 	return (
 		<aside
-			className={`bg-bgtone p-4 flex flex-col justify-between w-full absolute bottom-0 left-0 transition-transform duration-350 rounded-t-2xl lg:w-[350px] lg:h-full lg:static lg:translate-x-0 lg:transform-none lg:duration-0 lg:rounded-none
-			${isOpen ? "translate-y-0" : "translate-y-full"}`}
+			className={`bg-bgtone p-4 flex flex-col justify-between w-full absolute bottom-0 left-0 transition-transform duration-350 rounded-t-2xl shadow-[_0px_-5px_rgba(16,_185,_129,_0.2),_0px_-10px_rgba(16,_185,_129,_0.1),_0px_-15px_rgba(16,_185,_129,_0.05),_0px_-20px_rgba(16,_185,_129,_0.025)] lg:shadow-none  lg:w-[350px] lg:h-full lg:static lg:translate-x-0 lg:transform-none lg:duration-0 lg:rounded-none
+			${isOpen ? "translate-y-0" : "translate-y-full shadow-none"}`}
 		>
 			{/* Barre profil */}
 			<SideBarProfile />

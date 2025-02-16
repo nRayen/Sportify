@@ -4,7 +4,7 @@ import { useState } from "react";
 import SideBar from "./SideBar";
 
 const SideBarController = () => {
-	const [isOpen, setIsOpen] = useState(true);
+	const [isOpen, setIsOpen] = useState(false);
 
 	return (
 		<>
