@@ -14,31 +14,34 @@ export async function createSession(userId) {
   const session = await encrypt({ userId, expiresAt })
   const cookieStore = await cookies()
 
-  cookieStore.set('session', session, {
-    httpOnly: true,
-    secure: true,
-    expires: expiresAt,
-    sameSite: 'lax',
-    path: '/',
-  })
+  try {
+    cookieStore.set('session', session, {
+      httpOnly: true,
+      secure: true,
+      expires: expiresAt,
+      sameSite: 'strict',
+      path: '/',
+    })
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 // Refresh la session
 export async function updateSession() {
-  const session = (await cookies()).get('session')?.value
+  const session = cookies().get('session')?.value
   const payload = await decrypt(session)
 
   if (!session || !payload) {
     return null
   }
 
-  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)(
-    await cookies()
-  ).set('session', session, {
+  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+  (await cookies()).set('session', session, {
     httpOnly: true,
-    secure: true,
+    secure: false,
     expires: expires,
-    sameSite: 'lax',
+    sameSite: 'none',
     path: '/',
   })
 }
@@ -47,8 +50,14 @@ export async function updateSession() {
 // Récuperer la session
 export async function getSession() {
   const session = (await cookies()).get('session')?.value
+
+  if(!session) {
+    return null
+  }
+
   const payload = await decrypt(session)
   return payload
+
 }
 
 
@@ -80,5 +89,6 @@ export async function decrypt(session) {
     return payload
   } catch (error) {
     console.log('Failed to verify session')
+    console.log(error)
   }
 }

@@ -64,48 +64,4 @@ export async function POST(request) {
             { status: 500 } // Code HTTP : ERREUR SERVEUR
         )
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Création dans la base de données
-    // try {
-    //     await prisma.user.create({
-    //         data : {
-    //             pseudo,
-    //             firstname,
-    //             lastname,
-    //             email,
-    //             password : hashedPwd,
-    //             birthday,
-    //             sex,
-    //         }
-    //     })
-
-    //     return NextResponse.json(
-    //         { message: "Utilisateur ajouté avec succès" },
-    //         { status: 201 } // Code HTTP : CREATION
-    //     )
-
-    // // Gestion erreur inconnue
-    // } catch (error) {
-    //     console.error("Erreur lors de la création de l'utilisateur :", error);
-
-    //     return NextResponse.json(
-    //         { error: "Erreur interne du serveur", code: 500 },
-    //         { status: 500 } // Code HTTP : ERREUR SERVEUR
-    //     )
-    // }
 }

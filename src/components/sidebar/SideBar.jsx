@@ -11,8 +11,7 @@ const SideBar = () => {
 		"py-3 px-1 w-full h-8 flex items-center box-border hover:bg-backgroundItem dark:hover:bg-backgroundItem-dark gap-2 rounded-md";
 
 	return (
-		<aside className="w-[350px] h-full bg-bgtone p-4 flex flex-col justify-between">
-			{/* User */}
+		<aside className="bg-bgtone p-4 flex flex-col justify-between h-20 w-full absolute right-[-100%] top-0 lg:w-[350px] lg:h-full lg:static">
 			<SideBarProfile />
 
 			{/* Navigation */}

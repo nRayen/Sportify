@@ -60,6 +60,7 @@ const LoginForm = () => {
 				headers: {
 					"Content-Type": "application/json",
 				},
+				credentials: "include",
 				body: JSON.stringify(loginInfo),
 			});
 			const res = await response.json();
@@ -73,22 +74,16 @@ const LoginForm = () => {
 					setErrorList({ ...errorList, serverError: true });
 				}
 			} else {
-				// alert("Réussite : Implémentation email confirmation");
-				alert("res")
-				try {
-					router.push("/dashboard")
-				} catch (error) {
-					console.log(error)
-				}
+				router.push("/dashboard");
 			}
 		} catch (error) {
 			console.log(error.message);
-		} finally {
 		}
 	};
 
 	return (
 		<form
+			spellCheck={false}
 			onSubmit={handleSubmit}
 			noValidate
 			className="min-w-full rounded-xl my-auto sm:px-10 sm:py-8 dark:sm:bg-white/10 sm:dark:stroke-white/5 sm:bg-backgroundTone sm:border-[1px] sm:border-black/5"
@@ -168,7 +163,10 @@ const LoginForm = () => {
 				<button
 					type="submit"
 					disabled={isLoading}
-					className={clsx("text-xl font-medium text-[#0E0F11] py-2 rounded-lg bg-primary filter hover:opacity-80", {"filter opacity-80" : isLoading})}
+					className={clsx(
+						"text-xl font-medium text-[#0E0F11] py-2 rounded-lg bg-primary filter hover:opacity-80",
+						{ "filter opacity-80": isLoading }
+					)}
 				>
 					{isLoading ? "Chargement..." : "Connexion"}
 				</button>
@@ -180,7 +178,7 @@ const LoginForm = () => {
 						S'inscrire
 					</Link>
 				</p>
-				<SideBarThemeSwitch className="hover:bg-background dark:hover:bg-background-dark p-2 rounded-full transition-colors ease-in-out duration-300"/>
+				<SideBarThemeSwitch className="hover:bg-background dark:hover:bg-background-dark p-2 rounded-full transition-colors ease-in-out duration-300" />
 			</div>
 		</form>
 	);

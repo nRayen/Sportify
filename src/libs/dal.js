@@ -1,5 +1,3 @@
-
-
 import 'server-only'
 
 import { cookies, headers } from 'next/headers'
@@ -9,9 +7,8 @@ import { redirect } from 'next/navigation';
 
 export const verifySession = async () => {
   const cookie = (await cookies()).get('session')?.value
-  const session = await decrypt(cookie)
 
-  if (!session) {
+  if (!cookie) {
     const headerss = await headers()
     const pathname = headerss.get("x-invoke-path") || "/";
     if (pathname == "/") {
@@ -19,11 +16,14 @@ export const verifySession = async () => {
     }
     redirect('/login')
   }
+  const session = await decrypt(cookie)
 
   return { isAuth: true, userId: session.userId }
 }
 
 
+
+// Get User
 export const getUser = async () => {
     const session = await verifySession()
     if (!session) return null

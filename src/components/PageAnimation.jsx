@@ -10,7 +10,7 @@ const PageAnimation = ({ children }) => {
 		<AnimatePresence mode="wait">
 			<motion.div
 				key={pathname}
-                className="w-full min-h-screen"
+                className="w-full h-full"
 				initial={{ opacity: 0}}
 				animate={{ opacity: 1}}
 				exit={{ opacity: 0}}

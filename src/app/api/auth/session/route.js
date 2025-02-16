@@ -7,28 +7,25 @@ import { redirect } from "next/navigation";
 export async function GET() {
     const session = getSession()
 
-    if (!session) {
+    if (session == null) {
         return NextResponse.json(
             {message: "Aucune session trouvée", code: 404},
-            {code: 404}
+            {status: 404}
         )
-    }
-
-    try {
-        const decoded = await decrypt(session)
-        return NextResponse.json({ session: decoded }); // Réponse avec statut 200 par défaut
-    } catch (error) {
-        console.log(error)
-        return NextResponse.json({ session: null }, { status: 401 }); // Retourne 401 en cas d'erreur
+    } else {
+        try {
+            return NextResponse.json({ session }, {status: 200}); // Réponse avec statut 200 par défaut
+        } catch (error) {
+            console.log(error)
+            return NextResponse.json({ session: null }, { status: 401 }); // Retourne 401 en cas d'erreur
+        }
     }
 }
 
-
+// Méthode pour supprimer la session
 export async function DELETE() {
-
     try {
         await deleteSession()
-        // return NextResponse.redirect(new URL('/login', process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'))
         return NextResponse.json(
             {message: "Erreur lors de la suppression de la session", code: 200},
             {status: 200}

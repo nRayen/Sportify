@@ -1,9 +1,26 @@
-import { getUser } from "@/libs/dal";
+"use client"
+import { apiGetUser } from "@/libs/api/userAPI";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const SideBarProfile = async () => {
-	const user = await getUser();
+const SideBarProfile = () => {
+
+	const [user, setUser] = useState()
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const fetchedUser = await apiGetUser()
+				setUser(fetchedUser)
+			} catch (error) {
+				console.log(error)
+			}
+		};
+
+		fetchData();
+	  }, []);
+
 	return (
 		<section>
 			<div className="w-full bg-bgcolor h-16 rounded-lg p-2 box-border flex gap-2">
@@ -15,7 +32,7 @@ const SideBarProfile = async () => {
 					className="rounded-md"
 				/>
 				<div>
-					<p className="text-sm font-medium">{user.pseudo}</p>
+					<p className="text-sm font-medium">{user ? user.pseudo : "..."}</p>
 					<Link
 						href={"profile"}
 						className="text-xs text-primary hover:underline"
