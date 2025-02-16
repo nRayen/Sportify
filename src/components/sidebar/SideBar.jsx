@@ -1,22 +1,46 @@
+'use client'
 import Link from "next/link";
 import LogoutButton from "../LogoutButton";
 import { LogOut, Settings } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 import SideBarNav from "./SideBarNav";
 import SideBarProfile from "./SideBarProfile";
 import SideBarThemeSwitch from "./SideBarThemeSwitch";
 
-const SideBar = () => {
+const SideBar = ({ isOpen, setIsOpen }) => {
 	const itemstyle =
 		"py-3 px-1 w-full h-8 flex items-center box-border hover:bg-backgroundItem dark:hover:bg-backgroundItem-dark gap-2 rounded-md";
 
+	// Fonction pour gérer le clic en dehors de la sidebar
+	useEffect(() => {
+		// Fonction pour vérifier si le clic est en dehors de la sidebar
+		const handleClickOutside = (event) => {
+			// Vérifie si le clic est en dehors de la sidebar et de ses éléments enfants
+			if (event.target.closest(".sidebar") === null) {
+				setIsOpen(false); // Ferme la sidebar
+			}
+		};
+
+		// Ajoute l'écouteur d'événements au document
+		document.addEventListener("mousedown", handleClickOutside);
+
+		// Nettoie l'écouteur lors du démontage du composant
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, []);
+
 	return (
-		<aside className="bg-bgtone p-4 flex flex-col justify-between h-20 w-full absolute right-[-100%] top-0 lg:w-[350px] lg:h-full lg:static">
+		<aside
+			className={`bg-bgtone p-4 flex flex-col justify-between w-full absolute bottom-0 left-0 transition-transform duration-350 rounded-t-2xl lg:w-[350px] lg:h-full lg:static lg:translate-x-0 lg:transform-none lg:duration-0 lg:rounded-none
+			${isOpen ? "translate-y-0" : "translate-y-full"}`}
+		>
+			{/* Barre profil */}
 			<SideBarProfile />
 
 			{/* Navigation */}
 			<nav>
-				<h3 className="text-xs font-medium text-text-secondary mb-2 px-1">
+				<h3 className="text-xs font-medium text-text-secondary my-2 px-1">
 					Navigation
 				</h3>
 				<SideBarNav itemstyle={itemstyle} />
