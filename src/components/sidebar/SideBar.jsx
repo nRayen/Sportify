@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Link from "next/link";
 import LogoutButton from "../LogoutButton";
 import { LogOut, Settings } from "lucide-react";
@@ -48,6 +48,9 @@ const SideBar = ({ isOpen, setIsOpen }) => {
 
 			{/* Boutons en bas */}
 			<section className="w-full fill-black dark:fill-white text-sm gap-1 flex flex-col">
+				<h3 className="text-xs font-medium text-text-secondary my-2 px-1">
+					Réglages
+				</h3>
 				<SideBarThemeSwitch className={itemstyle}>Thème</SideBarThemeSwitch>
 
 				<Link href={"/settings"} className={itemstyle}>

@@ -1,6 +1,6 @@
 "use client"
 import { usePathname } from 'next/navigation';
-import { CalendarDays, Home, ChartLine } from "lucide-react";
+import { CalendarDays, Home, ChartLine, Dumbbell } from "lucide-react";
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 
@@ -26,7 +26,7 @@ const SideBarNav = ({itemstyle}) => {
         {
           link: "/exercices",
           text: "Exercices",
-          icon: Home,
+          icon: Dumbbell,
         },
         {
           link: "/suivi",
@@ -41,7 +41,7 @@ const SideBarNav = ({itemstyle}) => {
       const activeLink = link === path
 
       return (
-        <Link key={link} href={link} className={activeLink ? itemstyle+" text-primary bg-bgcolor" : itemstyle}>
+        <Link prefetch key={link} href={link} className={activeLink ? itemstyle+" text-primary bg-bgcolor" : itemstyle}>
           {React.createElement(icon, { strokeWidth: 1, size: 25 })}
           {text}
         </Link>

@@ -1,5 +1,6 @@
 import { getUser } from "@/libs/dal";
 import capitalize from "@/utils/Capitalize";
+import { Flame } from "lucide-react";
 import React from "react";
 
 const PageDashboard = async () => {
@@ -25,9 +26,16 @@ const PageDashboard = async () => {
 
 				<div className="flex items-center">
 					<p>Streak en cours :</p>
-					<p className="text-9xl ml-auto">{streak}</p>
+					<div className="relative w-20 h-20 ml-auto">
+						<Flame strokeWidth={1} className="absolute w-full h-32 stroke-primary z-0" />
+						<p className="absolute text-9xl ml-auto z-10">{streak}</p>
+					</div>
 				</div>
 			</section>
+
+
+
+
 
 
 
