@@ -6,16 +6,31 @@
   border: 1px solid red;
 } */
 
+/* Bg  */
 .bg-bgcolor {
   @apply bg-background dark:bg-background-dark
 }
+.bg-bgcolor-inverted {
+  @apply dark:bg-background bg-background-dark
+}
 
+
+/* Bg tone */
 .bg-bgtone {
   @apply bg-backgroundTone dark:bg-backgroundTone-dark
 }
+.bg-bgtone-inverted {
+  @apply dark:bg-backgroundTone bg-backgroundTone-dark
+}
 
+
+/* Texte */
 .text-default {
   @apply text-text-primary dark:text-text-primary-dark
+}
+
+.text-inverted {
+  @apply dark:text-text-primary text-text-primary-dark
 }
 
 @font-face {
