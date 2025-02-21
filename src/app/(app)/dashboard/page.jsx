@@ -62,53 +62,58 @@ const PageDashboard = async () => {
 
 				{/* Quick Stats */}
 				<div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-					<div className="bg-bgtone p-6 rounded-xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5">
+					<div className="bg-bgtone p-6 rounded-xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5 min-w-0">
 						<div className="flex items-center gap-4 mb-3">
-							<div className="p-2 bg-primary/10 rounded-lg">
+							<div className="p-2 bg-primary/10 rounded-lg flex-shrink-0">
 								<Activity className="text-primary" size={24} />
 							</div>
-							<p className="text-text-secondary">Séances</p>
+							<p className="text-text-secondary truncate">Séances</p>
 						</div>
-						<p className="text-2xl font-medium">12</p>
-						<p className="text-sm text-text-secondary">ce mois</p>
+						<p className="text-2xl font-medium truncate">12</p>
+						<p className="text-sm text-text-secondary truncate">ce mois</p>
 					</div>
 
-					<div className="bg-bgtone p-6 rounded-xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5">
+					<div className="bg-bgtone p-6 rounded-xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5 min-w-0">
 						<div className="flex items-center gap-4 mb-3">
-							<div className="p-2 bg-primary/10 rounded-lg">
+							<div className="p-2 bg-primary/10 rounded-lg flex-shrink-0">
 								<Target className="text-primary" size={24} />
 							</div>
-							<p className="text-text-secondary">Objectifs</p>
+							<p className="text-text-secondary truncate">Objectifs</p>
 						</div>
-						<p className="text-2xl font-medium">3/4</p>
-						<p className="text-sm text-text-secondary">complétés</p>
+						<p className="text-2xl font-medium truncate">3/4</p>
+						<p className="text-sm text-text-secondary truncate">complétés</p>
 					</div>
 
-					<div className="bg-bgtone p-6 rounded-xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5">
+					<div className="bg-bgtone p-6 rounded-xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5 min-w-0">
 						<div className="flex items-center gap-4 mb-3">
-							<div className="p-2 bg-primary/10 rounded-lg">
+							<div className="p-2 bg-primary/10 rounded-lg flex-shrink-0">
 								<TrendingUp className="text-primary" size={24} />
 							</div>
-							<p className="text-text-secondary">Progression</p>
+							<p className="text-text-secondary truncate">Progression</p>
 						</div>
 						<div className="flex items-end gap-1">
-							<p className="text-2xl font-medium">+12%</p>
-							<p className="text-sm text-text-secondary mb-1">/ mois</p>
+							<p className="text-2xl font-medium truncate">+12%</p>
+							<p className="text-sm text-text-secondary truncate mb-1">
+								/ mois
+							</p>
 						</div>
 					</div>
 				</div>
 
 				{/* Body Stats */}
 				<div className="bg-bgtone p-6 rounded-xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5">
-					<div className="flex items-center justify-between mb-6">
-						<h3 className="text-xl font-medium">Statistiques corporelles</h3>
-						<Link
-							href="/profile"
-							className="text-primary hover:underline text-sm flex items-center gap-1"
-						>
-							Voir plus <ChevronRight size={16} />
-						</Link>
-					</div>
+					<Link
+						href={"/planning"}
+						className="text-xl font-medium mb-4 flex items-center group"
+					>
+						Statistiques corporelles
+						<ChevronRight
+							strokeWidth={2}
+							size={25}
+							className="group-hover:translate-x-1 group-hover:stroke-primary group-hover:scale-110 transition-all duration-300"
+						/>
+					</Link>
+					
 					<div className="grid grid-cols-2 gap-6">
 						<div>
 							<p className="text-text-secondary mb-2">Poids actuel</p>

@@ -28,7 +28,7 @@ const SideBar = ({ isOpen, setIsOpen }) => {
 
 	return (
 		<aside
-			className={`bg-bgtone flex flex-col w-full fixed top-14 bottom-0 left-0 transition-transform duration-350 lg:w-[300px] lg:static lg:border-r-[1px] dark:lg:border-white/5
+			className={`bg-bgtone flex flex-col w-full fixed top-14 bottom-0 left-0 transition-transform duration-350 lg:w-[300px] lg:h-full lg:static lg:border-r-[1px] dark:lg:border-white/5
 			${isOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
 		>
 			{/* Profile Section */}
