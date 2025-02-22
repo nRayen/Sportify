@@ -13,6 +13,7 @@ import EyeClosedSVG from "./SVG/EyeClosedSVG";
 import { RegisterSchema } from "@/libs/zod";
 import clsx from "clsx";
 import SideBarThemeSwitch from "./sidebar/SideBarThemeSwitch";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
 	const [errorList, setErrorList] = useState({});
@@ -27,6 +28,8 @@ const RegisterForm = () => {
 	const [sex, setSex] = useState("");
 
 	const [showPassword, setShowPassword] = useState(true);
+
+	const router = useRouter();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -83,7 +86,7 @@ const RegisterForm = () => {
 				}
 				console.log(errorList);
 			} else {
-				alert("Réussite : Implémentation email confirmation");
+				router.push("/login?register=success");
 			}
 		} catch (error) {
 			console.log(error.message);

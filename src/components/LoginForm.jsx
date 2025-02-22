@@ -8,12 +8,14 @@ import PseudoSVG from "./SVG/PseudoSVG";
 import EyeOpenSVG from "./SVG/EyeOpenSVG";
 import EyeClosedSVG from "./SVG/EyeClosedSVG";
 import { LoginSchema } from "@/libs/zod";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import SideBarThemeSwitch from "./sidebar/SideBarThemeSwitch";
 import clsx from "clsx";
 
 const LoginForm = () => {
 	const router = useRouter();
+	const searchParams = useSearchParams();
+
 	const [errorList, setErrorList] = useState({});
 	const [showPassword, setShowPassword] = useState(true);
 
@@ -88,6 +90,13 @@ const LoginForm = () => {
 			noValidate
 			className="min-w-full rounded-xl my-auto sm:px-10 sm:py-8 dark:sm:bg-white/10 sm:dark:stroke-white/5 sm:bg-backgroundTone sm:border-[1px] sm:border-black/5"
 		>
+			{/* Message de succès */}
+			{searchParams.get("register") === "success" && (
+				<div className="bg-green-500/20 text-green-500 p-4 rounded-md mb-4">
+					Compte créé avec succès ! Veuillez vous connecter.
+				</div>
+			)}
+
 			<div className="flex flex-col gap-4 w-full">
 				{/* User */}
 				<section className="flex flex-col gap-2">

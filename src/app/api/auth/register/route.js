@@ -70,6 +70,7 @@ export async function POST(request) {
             react: WelcomeMail({ pseudo }),
         });
 
+        // Erreur lors de l'envoi du mail
         if (error) {
             return NextResponse.json(
                 { error : error.message , code: 500 },
@@ -77,6 +78,7 @@ export async function POST(request) {
             )
         }
 
+        // Utilisateur ajouté avec succès
         return NextResponse.json(
             { message: "Utilisateur ajouté avec succès" },
             { status: 201 } // Code HTTP : CREATION
