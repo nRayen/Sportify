@@ -1,5 +1,4 @@
 import "./globals.css";
-import PageAnimation from "../components/PageAnimation";
 import Providers from "@/components/Providers";
 
 export const metadata = {

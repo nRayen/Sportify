@@ -1,15 +1,11 @@
-import React from "react";
 import RegisterForm from "../../../components/RegisterForm";
 
 const SignupPage = () => {
-
-
-
 	return (
 		<>
-			<RegisterForm/>
+			<RegisterForm />
 		</>
-	)
+	);
 };
 
 export default SignupPage;

@@ -1,6 +1,4 @@
-import SideBar from "@/components/sidebar/SideBar";
 import PageAnimation from "@/components/PageAnimation";
-import { Menu } from "lucide-react";
 import SideBarController from "@/components/sidebar/SideBarController";
 
 const AppLayout = ({ children }) => {

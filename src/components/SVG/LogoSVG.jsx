@@ -1,9 +1,7 @@
-import React from "react";
-
 const LogoSVG = ({ className }) => {
 	return (
 		<svg
-            className={className}
+			className={className}
 			width="40"
 			height="40"
 			viewBox="0 0 40 40"

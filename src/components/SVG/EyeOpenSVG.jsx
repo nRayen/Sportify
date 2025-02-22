@@ -1,5 +1,3 @@
-import React from "react";
-
 const EyeOpenSVG = ({ className }) => {
 	return (
 		<svg

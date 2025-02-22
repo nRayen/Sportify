@@ -1,9 +1,5 @@
-import React from 'react'
-
 const PageSuivi = () => {
-  return (
-    <div>PageSuivi</div>
-  )
-}
+	return <div>PageSuivi</div>;
+};
 
-export default PageSuivi
+export default PageSuivi;

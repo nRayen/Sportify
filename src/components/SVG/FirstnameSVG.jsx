@@ -1,5 +1,3 @@
-import React from "react";
-
 const FirstnameSVG = ({ className }) => {
 	return (
 		<svg

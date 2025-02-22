@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
-import { decrypt, getSession } from '@/libs/session'
-import { cookies } from 'next/headers'
+import { getSession } from '@/libs/session'
 
 // 1. Specify protected and public routes
 const protectedRoutes = ['/dashboard','/planning', '/exercices']
