@@ -61,8 +61,9 @@ const PageDashboard = async () => {
 				</div>
 
 				{/* Quick Stats */}
-				<div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-					<div className="bg-bgtone p-6 rounded-xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5 min-w-0">
+				<div className="grid grid-cols-1 sm:grid-cols-6 gap-8">
+					{/* Séances */}
+					<div className="bg-bgtone p-6 rounded-xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5 min-w-0 sm:col-span-3">
 						<div className="flex items-center gap-4 mb-3">
 							<div className="p-2 bg-primary/10 rounded-lg flex-shrink-0">
 								<Activity className="text-primary" size={24} />
@@ -73,18 +74,8 @@ const PageDashboard = async () => {
 						<p className="text-sm text-text-secondary truncate">ce mois</p>
 					</div>
 
-					<div className="bg-bgtone p-6 rounded-xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5 min-w-0">
-						<div className="flex items-center gap-4 mb-3">
-							<div className="p-2 bg-primary/10 rounded-lg flex-shrink-0">
-								<Target className="text-primary" size={24} />
-							</div>
-							<p className="text-text-secondary truncate">Objectifs</p>
-						</div>
-						<p className="text-2xl font-medium truncate">3/4</p>
-						<p className="text-sm text-text-secondary truncate">complétés</p>
-					</div>
-
-					<div className="bg-bgtone p-6 rounded-xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5 min-w-0">
+					{/* Progression */}
+					<div className="bg-bgtone p-6 rounded-xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5 min-w-0 sm:col-span-3">
 						<div className="flex items-center gap-4 mb-3">
 							<div className="p-2 bg-primary/10 rounded-lg flex-shrink-0">
 								<TrendingUp className="text-primary" size={24} />
@@ -98,36 +89,49 @@ const PageDashboard = async () => {
 							</p>
 						</div>
 					</div>
-				</div>
 
-				{/* Body Stats */}
-				<div className="bg-bgtone p-6 rounded-xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5">
-					<Link
-						href={"/planning"}
-						className="text-xl font-medium mb-4 flex items-center group"
-					>
-						Statistiques corporelles
-						<ChevronRight
-							strokeWidth={2}
-							size={25}
-							className="group-hover:translate-x-1 group-hover:stroke-primary group-hover:scale-110 transition-all duration-300"
-						/>
-					</Link>
-					
-					<div className="grid grid-cols-2 gap-6">
-						<div>
-							<p className="text-text-secondary mb-2">Poids actuel</p>
-							<p className="text-3xl font-medium">
-								64<span className="text-lg text-text-secondary">kg</span>
-							</p>
-							<p className="text-sm text-primary">-2kg ce mois</p>
+					{/* Objectifs */}
+					<div className="bg-bgtone p-6 rounded-xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5 min-w-0 sm:col-span-2">
+						<div className="flex items-center mb-3 flex-wrap">
+							<div className="p-2 mr-4 bg-primary/10 rounded-lg flex-shrink-0">
+								<Target className="text-primary" size={24} />
+							</div>
+							<p className="text-text-secondary truncate">Objectifs</p>
 						</div>
-						<div>
-							<p className="text-text-secondary mb-2">Taille</p>
-							<p className="text-3xl font-medium">
-								1.88<span className="text-lg text-text-secondary">m</span>
-							</p>
-							<p className="text-sm text-text-secondary">IMC: 21.5</p>
+						<p className="text-2xl font-medium truncate">3/4</p>
+						<p className="text-sm text-text-secondary truncate">complétés</p>
+					</div>
+
+
+					{/* Body Stats */}
+					<div className="bg-bgtone p-6 rounded-xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5 sm:col-span-4">
+						<Link
+							href={"/planning"}
+							className="text-xl font-medium mb-4 flex items-center group"
+						>
+							Profil corporel
+							<ChevronRight
+								strokeWidth={2}
+								size={25}
+								className="group-hover:translate-x-1 group-hover:stroke-primary group-hover:scale-110 transition-all duration-300"
+							/>
+						</Link>
+
+						<div className="grid grid-cols-2 gap-6">
+							<div>
+								<p className="text-text-secondary mb-2">Poids actuel</p>
+								<p className="text-3xl font-medium">
+									64<span className="text-lg text-text-secondary">kg</span>
+								</p>
+								<p className="text-sm text-primary">-2kg ce mois</p>
+							</div>
+							<div>
+								<p className="text-text-secondary mb-2">Taille</p>
+								<p className="text-3xl font-medium">
+									1.88<span className="text-lg text-text-secondary">m</span>
+								</p>
+								<p className="text-sm text-text-secondary">IMC: 21.5</p>
+							</div>
 						</div>
 					</div>
 				</div>
