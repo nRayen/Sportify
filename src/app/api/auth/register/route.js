@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server";
 import prisma from "@/libs/prisma";
 import { RegisterSchema } from "@/libs/zod";
+import { Resend } from 'resend';
+import WelcomeMail from "@/components/emails/WelcomeMail";
 
 const bcrypt = require('bcrypt')
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 // Route pour créer un USER
 export async function POST(request) {
@@ -57,10 +60,29 @@ export async function POST(request) {
             }
         })
 
+
+
+        // Envoyer un mail de bienvenue
+        const { error } = await resend.emails.send({
+            from: 'Sportify <welcome.sportify@nrayen.fr>',
+            to: [email],
+            subject: 'Bienvenue sur Sportify',
+            react: WelcomeMail({ pseudo }),
+        });
+
+        if (error) {
+            return NextResponse.json(
+                { error : error.message , code: 500 },
+                { status: 500 } // Code HTTP : ERREUR SERVEUR
+            )
+        }
+
         return NextResponse.json(
             { message: "Utilisateur ajouté avec succès" },
             { status: 201 } // Code HTTP : CREATION
         )
+
+
 
     // Gestion erreur inconnue
     } catch (error) {
