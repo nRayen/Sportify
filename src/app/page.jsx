@@ -7,8 +7,11 @@ import {
 	Flame,
 } from "lucide-react";
 import SideBarThemeSwitch from "@/components/sidebar/SideBarThemeSwitch";
+import { getSession } from "@/libs/session";
 
-export default function LandingPage() {
+export default async function LandingPage() {
+	const session = await getSession()
+
 	return (
 		<div className="min-h-screen w-full">
 			{/* Hero Section */}
@@ -17,14 +20,20 @@ export default function LandingPage() {
 					<h1 className="text-2xl font-medium">Sportify</h1>
 					<div className="flex gap-4 items-center">
 						<SideBarThemeSwitch className="hover:bg-background dark:hover:bg-background-dark p-2 rounded-full transition-colors ease-in-out duration-300" />
-						<Link href="/login" className="text-primary hover:underline">
-							Se connecter
-						</Link>
+
+						{/* Si session, on n'affiche pas le bouton se connecter */}
+						{session ? null : (
+							<Link href="/login" className="text-primary hover:underline">
+								Se connecter
+							</Link>
+						)}
+
+						{/* Si session, on affiche le bouton accéder à mon compte, sinon on affiche le bouton s'inscrire */}
 						<Link
-							href="/register"
+							href={session ? "/dashboard" : "/register"}
 							className="bg-primary text-backgroundTone px-4 py-2 rounded-lg hover:opacity-90 transition-opacity"
 						>
-							S'inscrire
+							{session ? "Accéder à mon compte" : "S'inscrire"}
 						</Link>
 					</div>
 				</nav>
@@ -42,10 +51,10 @@ export default function LandingPage() {
 							en temps réel.
 						</p>
 						<Link
-							href="/register"
+							href={session ? "/dashboard" : "/register"}
 							className="inline-flex items-center gap-2 bg-primary text-backgroundTone px-6 py-3 rounded-lg hover:opacity-90 transition-opacity text-lg"
 						>
-							Commencer maintenant
+							{session ? "Accéder à mon compte" : "Commencer maintenant"}
 							<ChevronRight strokeWidth={2} />
 						</Link>
 					</div>

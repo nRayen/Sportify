@@ -29,11 +29,11 @@ export default {
         },
         primary: {
           // DEFAULT: "#4CAF50"
-          // DEFAULT: "#9B5DE5"
+          DEFAULT: "#9B5DE5"
           // DEFAULT: "#10B981",
           // DEFAULT: "#1BD760",
           // DEFAULT: "#FF8C00"
-          DEFAULT: "#64D8CB"
+          // DEFAULT: "#64D8CB"
         },
         text: {
           primary: {
