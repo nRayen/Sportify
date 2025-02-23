@@ -30,10 +30,10 @@ export default {
         primary: {
           // DEFAULT: "#4CAF50"
           // DEFAULT: "#9B5DE5"
-          // DEFAULT: "#10B981",
+          DEFAULT: "#10B981",
           // DEFAULT: "#1BD760",
           // DEFAULT: "#FF8C00"
-          DEFAULT: "#64D8CB"
+          DEFAULT: "#64D8CB",
         },
         text: {
           primary: {
@@ -46,6 +46,15 @@ export default {
       },
       fontFamily: {
         montreal: ['NeueMontreal', 'sans-serif'],
+      },
+      keyframes: {
+        "slide-up": {
+          "0%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        "slide-up": "slide-up 0.3s ease-out",
       },
     },
   },
