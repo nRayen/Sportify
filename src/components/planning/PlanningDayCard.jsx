@@ -1,7 +1,12 @@
 import { Clock } from "lucide-react";
 import React from "react";
 
-const PlanningDayCard = ({ date, getSessionsForDate, className, compact }) => {
+const PlanningDayCard = ({
+	date,
+	getSessionsForDate,
+	className,
+	compact = false,
+}) => {
 	return (
 		<div
 			key={date.toISOString()}
@@ -12,15 +17,22 @@ const PlanningDayCard = ({ date, getSessionsForDate, className, compact }) => {
 		>
 			{/* Day Header */}
 			<div className="p-3 sm:p-4 border-b border-black/10 dark:border-white/5">
-				<div className={"flex  items-baseline  gap-2 " + compact ? "" : "sm:gap-0 sm:flex-col sm:items-center" }>
-					<p className="font-medium">
+				<div
+					className={
+						"flex items-baseline gap-2 " + compact
+							? ""
+							: "sm:gap-0 sm:flex-col sm:items-center"
+					}
+				>
+					<p className={"font-medium " + (compact ? "" : "sm:text-center")}>
 						{date.toLocaleDateString("fr-FR", {
 							weekday: "short",
 							day: "numeric",
 						})}
-					</p>
-					<p className="text-text-secondary text-sm">
-						{date.toLocaleDateString("fr-FR", { month: "long" })}
+						{compact ? " " : <br />}
+						<span className="text-text-secondary text-sm">
+							{date.toLocaleDateString("fr-FR", { month: "long" })}
+						</span>
 					</p>
 				</div>
 			</div>

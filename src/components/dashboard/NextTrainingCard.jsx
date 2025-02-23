@@ -38,7 +38,7 @@ const NextTrainingCard = () => {
 		const startDate = new Date(currentWeek);
 		startDate.setDate(startDate.getDate() - startDate.getDay() + 1);
 
-		for (let i = 0; i < 2; i++) {
+		for (let i = 0; i < 3; i++) {
 			const date = new Date(startDate);
 			date.setDate(startDate.getDate() + i);
 			dates.push(date);
@@ -54,7 +54,7 @@ const NextTrainingCard = () => {
 	};
 
 	return (
-		<section className="bg-bgtone p-4 rounded-lg border-[1px] border-black/10 dark:border-white/5 h-full shadow-md shadow-black/5 dark:shadow-white/5">
+		<section className="bg-bgtone p-4 rounded-lg border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5">
 			<Link
 				href={"/planning"}
 				className="text-xl font-medium mb-4 flex items-center group"
@@ -78,6 +78,7 @@ const NextTrainingCard = () => {
 					/>
 				))}
 			</div>
+
 		</section>
 	);
 };

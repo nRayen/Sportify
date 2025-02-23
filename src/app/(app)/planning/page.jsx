@@ -210,6 +210,7 @@ const PagePlanning = () => {
 						key={date.toISOString()}
 						date={date}
 						getSessionsForDate={getSessionsForDate}
+						compact={false}
 					/>
 				))}
 			</div>
