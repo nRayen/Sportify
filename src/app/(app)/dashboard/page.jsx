@@ -1,3 +1,4 @@
+import NextTrainingCard from "@/components/dashboard/NextTrainingCard";
 import { getUser } from "@/libs/dal";
 import capitalize from "@/utils/Capitalize";
 import {
@@ -11,16 +12,6 @@ import Link from "next/link";
 import React from "react";
 // import { LineChart, Line, ResponsiveContainer } from "recharts";
 
-const data = [
-	{ date: "01/05", weight: 65.2 },
-	{ date: "02/05", weight: 65.0 },
-	{ date: "03/05", weight: 64.8 },
-	{ date: "04/05", weight: 64.5 },
-	{ date: "05/05", weight: 64.3 },
-	{ date: "06/05", weight: 64.0 },
-	{ date: "07/05", weight: 64.0 },
-];
-
 const PageDashboard = async () => {
 	const user = await getUser();
 	const date = new Date()
@@ -32,6 +23,8 @@ const PageDashboard = async () => {
 		.split(" ");
 
 	const streak = 7;
+
+
 
 	return (
 		<div className="h-full w-full gap-8 grid p-8 grid-cols-1 grid-rows-none lg:grid-cols-2">
@@ -102,7 +95,6 @@ const PageDashboard = async () => {
 						<p className="text-sm text-text-secondary truncate">complétés</p>
 					</div>
 
-
 					{/* Body Stats */}
 					<div className="bg-bgtone p-6 rounded-xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5 sm:col-span-4">
 						<Link
@@ -138,37 +130,7 @@ const PageDashboard = async () => {
 			</section>
 
 			{/* Planning */}
-			<section className="bg-bgtone p-4 rounded-lg border-[1px] border-black/10 dark:border-white/5 h-full shadow-md shadow-black/5 dark:shadow-white/5">
-				<Link
-					href={"/planning"}
-					className="text-xl font-medium mb-4 flex items-center group"
-				>
-					Planning
-					<ChevronRight
-						strokeWidth={2}
-						size={25}
-						className="group-hover:translate-x-1 group-hover:stroke-primary group-hover:scale-110 transition-all duration-300"
-					/>
-				</Link>
-
-				<div className="flex flex-col rounded-lg overflow-hidden">
-					<div className="bg-primary/10 p-4 border-b-[1px] border-black/10 dark:border-white/5">
-						<p>Lundi 06 Mai</p>
-					</div>
-					<div className=" p-4 border-b-[1px] border-black/10 dark:border-white/5">
-						<p>Lundi 06 Mai</p>
-					</div>
-					<div className=" p-4 border-b-[1px] border-black/10 dark:border-white/5">
-						<p>Lundi 06 Mai</p>
-					</div>
-					<div className=" p-4 border-b-[1px] border-black/10 dark:border-white/5">
-						<p>Lundi 06 Mai</p>
-					</div>
-					<div className=" p-4">
-						<p>Lundi 06 Mai</p>
-					</div>
-				</div>
-			</section>
+			<NextTrainingCard />
 
 			{/* Exercices */}
 			<section className="bg-bgtone p-4 rounded-lg border-[1px] border-black/10 dark:border-white/5 h-full shadow-md shadow-black/5 dark:shadow-white/5">
