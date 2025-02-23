@@ -44,11 +44,26 @@ export async function POST(request) {
 
         // Vérifier si on autorise la connexion
         if (passwordCheck && userLoginCheck) {
+
+            // Créer la session
             await createSession(userLoginCheck.id)
+
+            // Mettre à jour la date de dernière connexion
+            const lastLogin = await prisma.user.update({
+                where : {
+                    id : userLoginCheck.id
+                },
+                data : {
+                    last_auth : new Date()
+                }
+            })
+
+            // Renvoyer la réponse
             return NextResponse.json(
-                { message: "Bons identifiants" },
+                { message: "Connexion réussie"},
                 { status: 201 } // Code HTTP : CREATION
             )
+
         } else {
             return NextResponse.json(
                 { error: "Nom d'utilisateur et/ou mot de passe incorrect", code : 401 },
