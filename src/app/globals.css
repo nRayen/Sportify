@@ -6,55 +6,60 @@
   border: 1px solid red;
 } */
 
-/* Bg  */
-.bg-bgcolor {
-  @apply bg-background dark:bg-background-dark
-}
-.bg-bgcolor-inverted {
-  @apply dark:bg-background bg-background-dark
+@layer utilities {
+	.custom-scrollbar {
+		@apply scrollbar-thin scrollbar-track-background dark:scrollbar-track-background-dark scrollbar-thumb-primary/20 hover:scrollbar-thumb-primary/30 scrollbar-thumb-rounded-full;
+	}
 }
 
+/* Bg  */
+.bg-bgcolor {
+	@apply bg-background dark:bg-background-dark;
+}
+.bg-bgcolor-inverted {
+	@apply dark:bg-background bg-background-dark;
+}
 
 /* Bg tone */
 .bg-bgtone {
-  @apply bg-backgroundTone dark:bg-backgroundTone-dark
+	@apply bg-backgroundTone dark:bg-backgroundTone-dark;
 }
 .bg-bgtone-inverted {
-  @apply dark:bg-backgroundTone bg-backgroundTone-dark
+	@apply dark:bg-backgroundTone bg-backgroundTone-dark;
 }
-
 
 /* Texte */
 .text-default {
-  @apply text-text-primary dark:text-text-primary-dark
+	@apply text-text-primary dark:text-text-primary-dark;
 }
 
 .text-inverted {
-  @apply dark:text-text-primary text-text-primary-dark
+	@apply dark:text-text-primary text-text-primary-dark;
 }
 
 @font-face {
-  font-family: 'NeueMontreal';
-  src: url('/fonts/NeueMontreal-Regular.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
+	font-family: "NeueMontreal";
+	src: url("/fonts/NeueMontreal-Regular.woff2") format("woff2");
+	font-weight: normal;
+	font-style: normal;
 }
 
 @font-face {
-  font-family: 'NeueMontreal';
-  src: url('/fonts/NeueMontreal-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
+	font-family: "NeueMontreal";
+	src: url("/fonts/NeueMontreal-Medium.woff2") format("woff2");
+	font-weight: 500;
+	font-style: normal;
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  display: flex;
-  justifiy-content: center;
-  align-items : center;
-  min-height : 100vh;
+	font-family: Arial, Helvetica, sans-serif;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	height: 100vh;
 }
 
 html {
-  @apply transition-colors duration-500;
+	height: 100%;
+	@apply transition-colors duration-500;
 }

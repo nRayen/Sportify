@@ -1,34 +1,32 @@
 "use client";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import SideBar from "./SideBar";
+import LogoSVG from "../SVG/LogoSVG";
 
 const SideBarController = () => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (
-		<>
-			<>
-				<header className=" sidebar lg:hidden text-default bg-gradient-to-b to-background from-backgroundTone dark:to-background-dark dark:from-backgroundTone-dark  h-14 flex justify-between items-center px-2">
-					<h1 className="text-lg text-default">Sportify</h1>
-					<button
-						onClick={() => setIsOpen(!isOpen)}
-						className="h-full sidebarbutton"
-					>
-						<Menu
-							strokeWidth={1}
-							onClick={() => setIsOpen(!isOpen)}
-							height={35}
-							width={35}
-						/>
-					</button>
-				</header>
-
-				<div>
-					<SideBar isOpen={isOpen} setIsOpen={setIsOpen} />
+		<div className="sidebar">
+			<header className="lg:hidden text-default bg-bgtone border-b-[1px] border-black/10 dark:border-white/5 h-16 flex justify-between items-center px-4">
+				<div className="flex items-center gap-2">
+					<LogoSVG className="fill-primary w-6 h-6" />
+					<h1 className="text-lg font-medium">Sportify</h1>
 				</div>
-			</>
-		</>
+				<button
+					onClick={() => setIsOpen(!isOpen)}
+					className="p-2 hover:bg-background dark:hover:bg-background-dark rounded-lg transition-colors"
+				>
+					{isOpen ? (
+						<X strokeWidth={1} size={24} />
+					) : (
+						<Menu strokeWidth={1} size={24} />
+					)}
+				</button>
+			</header>
+			<SideBar isOpen={isOpen} setIsOpen={setIsOpen} />
+		</div>
 	);
 };
 

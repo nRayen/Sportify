@@ -24,10 +24,8 @@ const PageDashboard = async () => {
 
 	const streak = 7;
 
-
-
 	return (
-		<div className="h-full w-full gap-8 grid p-8 grid-cols-1 grid-rows-none lg:grid-cols-2">
+		<div className="h-full w-full gap-8 grid p-4 pb-20 sm:p-6 sm:pb-24 lg:p-8 lg:pb-32 grid-cols-1 grid-rows-none lg:grid-cols-2">
 			<section className="flex flex-col gap-8">
 				{/* Welcome & Date */}
 				<div className="bg-bgtone p-6 rounded-2xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5">

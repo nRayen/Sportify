@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
@@ -10,9 +10,9 @@ const PageAnimation = ({ children }) => {
 		<AnimatePresence mode="wait">
 			<motion.div
 				key={pathname}
-                className="w-full h-full"
-				initial={{ opacity: 0}}
-				animate={{ opacity: 1}}
+				className="w-full min-h-screen flex flex-col-reverse lg:flex-row overflow-y-auto overflow-x-hidden relative custom-scrollbar"
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
 				transition={{ duration: 0.4, ease: "easeInOut" }}
 			>
 				{children}

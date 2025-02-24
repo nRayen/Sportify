@@ -13,7 +13,6 @@ import {
 import PlanningDayCard from "@/components/planning/PlanningDayCard";
 
 const PagePlanning = () => {
-
 	const [showNewSessionModal, setShowNewSessionModal] = useState(false);
 	const [currentWeek, setCurrentWeek] = useState(new Date());
 	const [exercises, setExercises] = useState([
@@ -155,7 +154,7 @@ const PagePlanning = () => {
 	};
 
 	return (
-		<div className="h-full w-full p-4 sm:p-6 lg:p-8">
+		<div className=" w-full p-4 pb-20 sm:p-6 sm:pb-24 lg:p-8 lg:pb-32">
 			{/* Header Section */}
 			<div className="bg-bgtone p-4 sm:p-6 rounded-2xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5 mb-6 sm:mb-8">
 				<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-6">
@@ -204,7 +203,7 @@ const PagePlanning = () => {
 			</div>
 
 			{/* Calendar Grid */}
-			<div className="flex flex-col sm:flex-row flex-wrap gap-4 overflow-x-auto h-full">
+			<div className="flex flex-col sm:flex-row flex-wrap gap-4 overflow-x-auto">
 				{getWeekDates().map((date) => (
 					<PlanningDayCard
 						key={date.toISOString()}
@@ -238,7 +237,7 @@ const PagePlanning = () => {
 								</div>
 							</div>
 
-							<div className="p-4 sm:p-6 overflow-y-auto flex-1">
+							<div className="p-4 sm:p-6 overflow-y-auto flex-1 custom-scrollbar">
 								<form className="space-y-6">
 									<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
 										{/* Left Column - Basic Info & Objective */}

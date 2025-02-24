@@ -38,7 +38,7 @@ const SideBar = ({ isOpen, setIsOpen }) => {
 
 			{/* Navigation */}
 			<div className="flex-1 overflow-y-auto p-4">
-				<h3 className="text-xs font-medium text-text-secondary px-4 mb-2">
+				<h3 className="text-sm font-medium text-text-secondary px-4 mb-2">
 					Navigation
 				</h3>
 				<SideBarNav itemstyle={itemstyle} />
@@ -46,7 +46,7 @@ const SideBar = ({ isOpen, setIsOpen }) => {
 
 			{/* Bottom Section */}
 			<div className="p-4 border-t-[1px] border-black/5 dark:border-white/5">
-				<h3 className="text-xs font-medium text-text-secondary px-4 mb-2">
+				<h3 className="text-sm font-medium text-text-secondary px-4 mb-2">
 					Réglages
 				</h3>
 				<div className="flex flex-col gap-1">
