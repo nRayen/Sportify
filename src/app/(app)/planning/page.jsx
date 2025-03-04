@@ -5,25 +5,34 @@ import {
 	Plus,
 	ChevronLeft,
 	ChevronRight,
-	Clock,
-	X,
-	Dumbbell,
-	Target,
 } from "lucide-react";
 import PlanningDayCard from "@/components/planning/PlanningDayCard";
 import NewSessionModal from "@/components/forms/NewSessionModal";
+import EditSessionModal from "@/components/forms/EditSessionModal";
 
 const PagePlanning = () => {
 	const [showNewSessionModal, setShowNewSessionModal] = useState(false);
+	const [showEditSessionModal, setShowEditSessionModal] = useState(false);
+	const [editedSession, setEditedSession] = useState(undefined)
+
 	const [currentWeek, setCurrentWeek] = useState(new Date());
 	const [exercises, setExercises] = useState([
 		{ id: 1, name: "", sets: "", reps: "", weight: "" },
 	]);
 
+	// Ouvrir modal edit session avec infos de la session
+	const openEditSessionModal = (session) => {
+		setEditedSession(session)
+		setShowEditSessionModal(true)
+	}
+
+
+
 	// Get current week's Monday
 	const monday = new Date();
 	monday.setDate(monday.getDate() - monday.getDay() + 1);
 
+	// Données de test
 	const sessions = [
 		{
 			id: 1,
@@ -32,6 +41,10 @@ const PagePlanning = () => {
 			time: "08:00",
 			type: "Musculation",
 			duration: 60,
+			objective: "DQSJKDNSQDQSDNK",
+			exercises: [
+				
+			]
 		},
 		{
 			id: 2,
@@ -155,7 +168,7 @@ const PagePlanning = () => {
 	};
 
 	return (
-		<div className=" w-full p-4 pb-20 sm:p-6 sm:pb-24 lg:p-8 lg:pb-32">
+		<div className=" w-full p-4 sm:p-6 lg:p-8">
 			{/* Header Section */}
 			<div className="bg-bgtone p-4 sm:p-6 rounded-2xl border-[1px] border-black/10 dark:border-white/5 shadow-md shadow-black/5 dark:shadow-white/5 mb-6 sm:mb-8">
 				<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-6">
@@ -210,7 +223,9 @@ const PagePlanning = () => {
 						key={date.toISOString()}
 						date={date}
 						getSessionsForDate={getSessionsForDate}
+						openEditSessionModal={openEditSessionModal}
 						compact={false}
+						editButton
 					/>
 				))}
 			</div>
@@ -219,6 +234,12 @@ const PagePlanning = () => {
 			<NewSessionModal
 				isOpen={showNewSessionModal}
 				onClose={() => setShowNewSessionModal(false)}
+			/>
+
+			<EditSessionModal
+				session={editedSession}
+				isOpen={showEditSessionModal}
+				onClose={() => setShowEditSessionModal(false)}
 			/>
 		</div>
 	);
