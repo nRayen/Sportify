@@ -90,10 +90,16 @@ const LoginForm = () => {
 			noValidate
 			className="min-w-full rounded-xl my-auto sm:px-10 sm:py-8 dark:sm:bg-white/10 sm:dark:stroke-white/5 sm:bg-backgroundTone sm:border-[1px] sm:border-black/5"
 		>
-			{/* Message de succès */}
+			{/* Message de succès Inscription*/}
 			{searchParams.get("register") === "success" && (
 				<div className="bg-green-500/20 text-green-500 p-4 rounded-md mb-4">
 					Compte créé avec succès ! Veuillez vous connecter.
+				</div>
+			)}
+			{/* Message de succès Reset password*/}
+			{searchParams.get("resetpassword") === "success" && (
+				<div className="bg-green-500/20 text-green-500 p-4 rounded-md mb-4">
+					Lien pour changer votre mot de passe envoyé !
 				</div>
 			)}
 
@@ -125,7 +131,7 @@ const LoginForm = () => {
 					<div className="flex justify-between">
 						<label htmlFor="password">Mot de passe</label>
 						<Link
-							href={"/forgot-pwd"}
+							href={"/forgot-password"}
 							className="text-sm text-primary hover:underline"
 						>
 							Mot de passe oublié
