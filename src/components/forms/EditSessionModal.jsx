@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X, Dumbbell, Target, Plus } from "lucide-react";
+import { X, Dumbbell, Target, Plus, Info } from "lucide-react";
 
 const EditSessionModal = ({ isOpen, onClose, session }) => {
   console.log(session);
@@ -63,6 +63,12 @@ const EditSessionModal = ({ isOpen, onClose, session }) => {
                 <div className="space-y-6">
                   {/* Basic Info Section */}
                   <div className="space-y-4">
+                    <div className="flex items-center gap-2 mb-4">
+											<Info size={20} className="text-primary" />
+											<h3 className="text-lg font-medium">
+												Informations de la séance
+											</h3>
+										</div>	
                     <div>
                       <label className="block text-sm text-text-secondary mb-1">
                         Titre
