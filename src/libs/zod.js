@@ -1,5 +1,7 @@
 import { z } from "zod"
 
+
+// Authentification
 // Schéma Form Login
 export const LoginSchema = z.object({
     userLogin : z.string().min(1, "Ce champ ne peut pas être vide."),
@@ -24,4 +26,33 @@ export const RegisterSchema = z.object({
 // Schéma Form ForgotPassword
 export const ForgotPasswordSchema = z.object({
     email: z.string().email("Veuillez fournir un email valide")
+})
+
+
+
+// Exercices
+// Schéma Form Create Exercise
+export const CreateExerciseSchema = z.object({
+    title: z.string().min(1, "Ce champ ne peut pas être vide."),
+    description: z.string().optional(),
+    isPublic: z.boolean().optional()
+})
+
+// Schéma Form Update Exercise
+export const UpdateExerciseSchema = z.object({
+    id: z.string().min(1, "Ce champ ne peut pas être vide."),
+    title: z.string().min(1, "Ce champ ne peut pas être vide."),
+    description: z.string().optional(),
+    isPublic: z.boolean().optional()
+})
+
+// Schéma Form Delete Exercise
+export const DeleteExerciseSchema = z.object({
+    id: z.string().min(1, "Ce champ ne peut pas être vide.")
+})
+
+// Schéma Form Make Public Exercise
+export const MakePublicExerciseSchema = z.object({
+    id: z.string().min(1, "Ce champ ne peut pas être vide."),
+    isPublic: z.boolean().optional()
 })
