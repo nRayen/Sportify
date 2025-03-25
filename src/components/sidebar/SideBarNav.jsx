@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { CalendarDays, Home, ChartLine, Dumbbell } from "lucide-react";
+import { Home, Dumbbell } from "lucide-react";
 import React from "react";
 import Link from "next/link";
 
@@ -14,19 +14,9 @@ const SideBarNav = ({ itemstyle }) => {
 			icon: Home,
 		},
 		{
-			link: "/planning",
-			text: "Planning",
-			icon: CalendarDays,
-		},
-		{
 			link: "/exercices",
 			text: "Exercices",
 			icon: Dumbbell,
-		},
-		{
-			link: "/suivi",
-			text: "Suivi",
-			icon: ChartLine,
 		},
 	];
 
