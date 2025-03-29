@@ -8,7 +8,7 @@ datasource db {
 }
 
 model User {
-  id               Int                @id(map: "USER_pkey") @default(autoincrement())
+  id               Int                @id(map: "USER_pkey") @default(autoincrement()) @map("id_user")
   pseudo           String             @unique @db.VarChar(50)
   firstname        String             @db.VarChar(50)
   lastname         String             @db.VarChar(50)
@@ -26,7 +26,7 @@ model User {
 }
 
 model Seance {
-  id        Int      @id(map: "seance_pkey") @default(autoincrement())
+  id        Int      @id(map: "seance_pkey") @default(autoincrement()) @map("id_seance")
   id_user   Int
   title     String   @db.VarChar(15)
   date      DateTime @db.Timestamp(6)
@@ -37,7 +37,7 @@ model Seance {
 }
 
 model ResetPasswordKey {
-  id         Int      @id @default(autoincrement())
+  id         Int      @id @default(autoincrement()) @map("id_reset_password_key")
   key        String   @db.VarChar(100)
   id_user    Int
   created_at DateTime @default(now()) @db.Timestamp(6)
@@ -45,7 +45,7 @@ model ResetPasswordKey {
 }
 
 model Exercice {
-  id          Int     @id @default(autoincrement())
+  id          Int     @id @default(autoincrement()) @map("id_exercice")
   title       String  @db.VarChar(50)
   description String?
   public      Boolean @default(false)
@@ -54,7 +54,7 @@ model Exercice {
 }
 
 model ExerciceStats {
-  id          Int     @id @default(autoincrement())
+  id          Int     @id @default(autoincrement()) @map("id_exercice_stats")
   id_exercice Int
   id_seance   Int
   reps        Int
@@ -63,7 +63,7 @@ model ExerciceStats {
 }
 
 model HeightEntry {
-  id         Int      @id @default(autoincrement())
+  id         Int      @id @default(autoincrement()) @map("id_height_entry")
   created_at DateTime @default(now()) @db.Timestamp(6)
   height     Int
   id_user    Int
@@ -71,7 +71,7 @@ model HeightEntry {
 }
 
 model WeightEntry {
-  id         Int      @id @default(autoincrement())
+  id         Int      @id @default(autoincrement()) @map("id_weight_entry")
   weight     Decimal  @db.Decimal(5, 1)
   created_at DateTime @default(now()) @db.Timestamp(6)
   id_user    Int
