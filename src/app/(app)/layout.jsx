@@ -1,4 +1,3 @@
-import PageAnimation from "@/components/PageAnimation";
 import SideBarController from "@/components/sidebar/SideBarController";
 
 const AppLayout = ({ children }) => {
