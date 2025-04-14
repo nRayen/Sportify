@@ -36,3 +36,23 @@ export async function PUT (request, { params }) {
         return NextResponse.json({ error: "Erreur de chargement", code: "INTERNAL_SERVER_ERROR" }, { status: 500 });
     }
 }
+
+
+// Requete API pour supprimer un exercice
+export async function DELETE (request, { params }) {
+    const { id } = await params;
+
+    // Suppression de l'exercice dans la base de données
+    try {
+        const exercises = await prisma.exercice.delete({
+            where: { id: parseInt(id) }
+        })
+
+        return NextResponse.json(
+            exercises, {message: "Exercice supprimé avec succès", code: "SUCCESS"}, {status: 200}
+        )
+    } catch (error) {
+        console.log(error.message);
+        return NextResponse.json({ error: "Erreur de chargement", code: "INTERNAL_SERVER_ERROR" }, { status: 500 });
+    }
+}

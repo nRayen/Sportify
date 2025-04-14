@@ -30,6 +30,9 @@ export const ForgotPasswordSchema = z.object({
 
 
 
+
+
+
 // Exercices
 // Schéma Form Create Exercise
 export const CreateExerciseSchema = z.object({
@@ -55,4 +58,31 @@ export const DeleteExerciseSchema = z.object({
 export const MakePublicExerciseSchema = z.object({
     id: z.string().min(1, "Ce champ ne peut pas être vide."),
     isPublic: z.boolean().optional()
+})
+
+
+
+
+
+// Seances
+// Schéma Form Create Seance
+export const CreateSeanceSchema = z.object({
+    title: z.string().min(1, "Ce champ ne peut pas être vide."),
+    date: z.string().min(1, "Ce champ ne peut pas être vide."),
+    duration: z.number().min(1, "Ce champ ne peut pas être vide."),
+    objective: z.string().optional()
+})
+
+// Schéma Form Update Seance
+export const UpdateSeanceSchema = z.object({
+    id: z.string().min(1, "Ce champ ne peut pas être vide."),
+    title: z.string().min(1, "Ce champ ne peut pas être vide."),
+    date: z.string().min(1, "Ce champ ne peut pas être vide."),
+    duration: z.number().min(1, "Ce champ ne peut pas être vide."),
+    objective: z.string().optional()
+})
+
+// Schéma Form Delete Seance
+export const DeleteSeanceSchema = z.object({
+    id: z.string().min(1, "Ce champ ne peut pas être vide.")
 })

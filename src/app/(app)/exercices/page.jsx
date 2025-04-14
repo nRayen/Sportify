@@ -1,77 +1,7 @@
-// import { useState } from "react";
-import { Plus, Search } from "lucide-react";
-import ExerciseCard from "@/components/exercices/ExerciseCard";
-import NewExerciseModal from "@/components/exercices/NewExerciseModal";
 import ExerciseLibrary from "@/components/exercices/ExerciseLibrary";
 import { Suspense } from "react";
 
 const PageExercices = async () => {
-	// const [activeTab, setActiveTab] = useState("personal");
-	// const [showNewExerciseModal, setShowNewExerciseModal] = useState(false);
-	// const [searchQuery, setSearchQuery] = useState("");
-	// const [isLoading, setIsLoading] = useState(false);
-	// const [personalExercises, setPersonalExercises] = useState();
-
-	// Récupération des exercices personnels
-
-
-
-
-	// const [publicExercises, setPublicExercises] = useState([
-	// 	{
-	// 		id: 3,
-	// 		title: "Traction",
-	// 		description: "Exercice de musculation pour le dos",
-	// 		public: true,
-	// 	},
-	// 	{
-	// 		id: 4,
-	// 		title: "Curl biceps",
-	// 		description: "Exercice de musculation pour les bras",
-	// 		public: true,
-	// 	},
-	// ]);
-
-	const handleCreateExercise = (newExercise) => {
-		setPersonalExercises([
-			...personalExercises,
-			{
-				id: personalExercises.length + 1,
-				...newExercise,
-				public: false,
-			},
-		]);
-	};
-
-	const handleUpdateExercise = (updatedExercise) => {
-		setPersonalExercises(
-			personalExercises.map((exercise) =>
-				exercise.id === updatedExercise.id ? updatedExercise : exercise
-			)
-		);
-	};
-
-	const handleDeleteExercise = (id) => {
-		setPersonalExercises(
-			personalExercises.filter((exercise) => exercise.id !== id)
-		);
-	};
-
-	const handleMakePublic = (id) => {
-		const exercise = personalExercises.find((ex) => ex.id === id);
-		if (exercise) {
-			const updatedExercise = { ...exercise, public: true };
-			handleUpdateExercise(updatedExercise);
-		}
-	};
-
-	// const filteredPersonalExercises = personalExercises.filter((exercise) =>
-	// 	exercise.title.toLowerCase().includes(searchQuery.toLowerCase())
-	// );
-
-	// const filteredPublicExercises = publicExercises.filter((exercise) =>
-	// 	exercise.title.toLowerCase().includes(searchQuery.toLowerCase())
-	// );
 
 	return (
 		<div className="w-full p-4 pb-20 sm:p-6 sm:pb-24 lg:p-8 lg:pb-32">

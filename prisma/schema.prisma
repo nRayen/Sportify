@@ -26,14 +26,14 @@ model User {
 }
 
 model Seance {
-  id        Int      @id(map: "seance_pkey") @default(autoincrement()) @map("id_seance")
-  id_user   Int
-  title     String   @db.VarChar(15)
-  date      DateTime @db.Timestamp(6)
-  type      String   @db.VarChar(20)
-  duration  Int
-  objective String?
-  User      User     @relation(fields: [id_user], references: [id], onDelete: Cascade, map: "user_id_fkey")
+  id            Int             @id(map: "seance_pkey") @default(autoincrement()) @map("id_seance")
+  id_user       Int
+  title         String          @db.VarChar(15)
+  date          DateTime        @db.Timestamptz(6)
+  duration      Int
+  objective     String?
+  ExerciceStats ExerciceStats[]
+  User          User            @relation(fields: [id_user], references: [id], onDelete: Cascade, map: "user_id_fkey")
 }
 
 model ResetPasswordKey {
@@ -41,25 +41,28 @@ model ResetPasswordKey {
   key        String   @db.VarChar(100)
   id_user    Int
   created_at DateTime @default(now()) @db.Timestamp(6)
-  User       User     @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_id_fkey")
+  User       User     @relation(fields: [id_user], references: [id], onDelete: Cascade, map: "user_id_fkey")
 }
 
 model Exercice {
-  id          Int     @id @default(autoincrement()) @map("id_exercice")
-  title       String  @db.VarChar(50)
-  description String?
-  public      Boolean @default(false)
-  id_user     Int
-  User        User    @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "constraint_1")
+  id            Int             @id @default(autoincrement()) @map("id_exercice")
+  title         String          @db.VarChar(50)
+  description   String?
+  public        Boolean         @default(false)
+  id_user       Int
+  User          User            @relation(fields: [id_user], references: [id], onDelete: Cascade, map: "user_id_fkey")
+  ExerciceStats ExerciceStats[]
 }
 
 model ExerciceStats {
-  id          Int     @id @default(autoincrement()) @map("id_exercice_stats")
+  id          Int      @id @default(autoincrement()) @map("id_exercice_stats")
   id_exercice Int
   id_seance   Int
   reps        Int
-  weight      Decimal @db.Decimal(5, 1)
+  weight      Decimal  @db.Decimal(5, 1)
   sets        Int
+  Exercice    Exercice @relation(fields: [id_exercice], references: [id], onDelete: Cascade, map: "exercice_id_fkey")
+  Seance      Seance   @relation(fields: [id_seance], references: [id], onDelete: Cascade, map: "seance_id_fkey")
 }
 
 model HeightEntry {
@@ -67,7 +70,7 @@ model HeightEntry {
   created_at DateTime @default(now()) @db.Timestamp(6)
   height     Int
   id_user    Int
-  User       User     @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "constraint_1")
+  User       User     @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_id_fkey")
 }
 
 model WeightEntry {
@@ -75,5 +78,5 @@ model WeightEntry {
   weight     Decimal  @db.Decimal(5, 1)
   created_at DateTime @default(now()) @db.Timestamp(6)
   id_user    Int
-  User       User     @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "constraint_1")
+  User       User     @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_id_fkey")
 }
