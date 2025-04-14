@@ -1,36 +1,37 @@
 "use client";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PlanningDayCard from "../planning/PlanningDayCard";
 
 const NextTrainingCard = () => {
 	const [currentWeek, setCurrentWeek] = useState(new Date());
+	const [seances, setSeances] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState(null);
+
 
 	// Get current week's Monday
 	const monday = new Date();
 	monday.setDate(monday.getDate() - monday.getDay() + 1);
 
-	const sessions = [
-		{
-			id: 1,
-			title: "Upper Body Workout",
-			date: monday.toISOString().split("T")[0],
-			time: "08:00",
-			type: "Musculation",
-			duration: 60,
-		},
-		{
-			id: 2,
-			title: "Cardio HIIT",
-			date: new Date(monday.setDate(monday.getDate() + 3))
-				.toISOString()
-				.split("T")[0],
-			time: "17:30",
-			type: "Cardio",
-			duration: 30,
-		},
-	];
+
+	// Récupérer les seances
+	useEffect(() => {
+		try {
+			setIsLoading(true);
+			const fetchSeances = async () => {
+				const seances = await getAPI_Seances();
+				setSeances(seances);
+			};
+			fetchSeances();
+		} catch (error) {
+			setError(error.message);
+			console.error("Erreur lors de la récupération des seances", error);
+		} finally {
+			setIsLoading(false);
+		}
+	}, []);
 
 	// Get week dates
 	const getWeekDates = () => {
@@ -46,10 +47,10 @@ const NextTrainingCard = () => {
 		return dates;
 	};
 
-	// Get sessions for a specific date
-	const getSessionsForDate = (date) => {
-		return sessions.filter(
-			(session) => session.date === date.toISOString().split("T")[0]
+	// Get seances for a specific date
+	const getSeancesForDate = (date) => {
+		return seances.filter(
+			(seance) => seance.date.toISOString().split("T")[0] === date.toISOString().split("T")[0]
 		);
 	};
 
@@ -73,7 +74,7 @@ const NextTrainingCard = () => {
 						key={date.toISOString()}
 						date={date}
 						className=""
-						getSessionsForDate={getSessionsForDate}
+						getSeancesForDate={getSeancesForDate}
 						compact={true}
 					/>
 				))}

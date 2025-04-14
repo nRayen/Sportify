@@ -187,7 +187,7 @@ const ExerciseLibrary = () => {
 				</div>
 				<button
 					onClick={() => setShowNewExerciseModal(true)}
-					className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-xl hover:bg-primary/90 transition-colors w-full sm:w-auto justify-center"
+					className="flex items-center justify-center gap-2 w-full md:w-auto bg-primary text-white px-6 py-2.5 rounded-xl hover:bg-primary/90 transition-all duration-200 shadow-sm hover:shadow-md"
 				>
 					<Plus size={18} />
 					<span>Nouvel exercice</span>
