@@ -86,3 +86,12 @@ export const UpdateSeanceSchema = z.object({
 export const DeleteSeanceSchema = z.object({
     id: z.string().min(1, "Ce champ ne peut pas être vide.")
 })
+
+
+// Données physiques
+export const CreatePhysicalDataSchema = z.object({
+    taille: z.number().min(1, "Ce champ ne peut pas être vide."),
+    poids: z.number().min(1, "Ce champ ne peut pas être vide."),
+})
+
+
