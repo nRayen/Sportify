@@ -190,9 +190,9 @@ const EditSeanceModal = ({ isOpen, onClose, seance, onSubmit }) => {
 						<div className="space-y-4">
 							<div>
 								<div className="space-y-4">
-									{exerciseList.map((exercise) => (
+									{exerciseList.map((exercise, index) => (
 										<AddExerciseForm
-											key={exercise.id}
+											key={index}
 											exercise={exercise}
 											onUpdate={updateExercise}
 											onRemove={removeExercise}
