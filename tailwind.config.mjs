@@ -57,8 +57,5 @@ export default {
         "slide-up": "slide-up 0.3s ease-out",
       },
     },
-  },
-  plugins: [
-    require('tailwind-scrollbar')({ nocompatible: true }),
-  ],
+  }
 };

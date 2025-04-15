@@ -1,35 +1,25 @@
 import React from "react";
-import {
-	Html,
-	Body,
-	Container,
-	Section,
-	Text,
-	Link,
-	Heading,
-	Hr,
-} from "@react-email/components";
 
 const ResetPasswordMail = ({ hash }) => {
 	return (
-		<Html>
-			<Body style={styles.body}>
-				<Container style={styles.container}>
+		<html>
+			<body style={styles.body}>
+				<div style={styles.container}>
 					{/* Header */}
-					<Section style={styles.header}>
-						<Heading as="h1" style={styles.logo}>
+					<div style={styles.header}>
+						<h1 style={styles.logo}>
 							Sportify
-						</Heading>
+						</h1>
 						<div style={styles.logoUnderline}></div>
-					</Section>
+					</div>
 
 					{/* Content */}
-					<Section style={styles.content}>
-						<Heading as="h2" style={styles.title}>
+					<div style={styles.content}>
+						<h2 style={styles.title}>
 							Mot de passe oublié !
-						</Heading>
+						</h2>
 
-						<Section style={styles.card}>
+						<div style={styles.card}>
 							<div style={styles.cardHeader}>
 								<div style={styles.iconContainer}>
 									<img
@@ -43,36 +33,36 @@ const ResetPasswordMail = ({ hash }) => {
 										}}
 									/>
 								</div>
-								<Heading as="h3" style={styles.cardTitle}>
+								<h3 style={styles.cardTitle}>
 									Message de sécurité
-								</Heading>
+								</h3>
 							</div>
 
-							<Text style={styles.cardText}>
+							<p style={styles.cardText}>
 								Vous avez demander un lien pour réinitialiser votre mot de passe.
-							</Text>
+							</p>
 
-							<Link href={"https://sportify.com/reset-password/" + hash} style={styles.button}>
+							<a href={"https://sportify.com/reset-password/" + hash} style={styles.button}>
 								Modifier votre mot de passe →
-							</Link>
-						</Section>
+							</a>
+						</div>
 
-						<Text style={styles.disclaimer}>
+						<p style={styles.disclaimer}>
 							Si vous n'avez pas fait cette demande, vous pouvez ignorer cet email.
-						</Text>
-					</Section>
+						</p>
+					</div>
 
-					<Hr style={styles.divider} />
+					<hr style={styles.divider} />
 
 					{/* Footer */}
-					<Section style={styles.footer}>
-						<Text style={styles.footerText}>
+					<div style={styles.footer}>
+						<p style={styles.footerText}>
 							© {new Date().getFullYear()} Sportify. Tous droits réservés.
-						</Text>
-					</Section>
-				</Container>
-			</Body>
-		</Html>
+						</p>
+					</div>
+				</div>
+			</body>
+		</html>
 	);
 };
 

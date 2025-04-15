@@ -1,41 +1,31 @@
 import React from "react";
-import {
-	Html,
-	Body,
-	Container,
-	Section,
-	Text,
-	Link,
-	Heading,
-	Hr,
-} from "@react-email/components";
 
 const WelcomeMail = ({ pseudo }) => {
 	return (
-		<Html>
-			<Body style={styles.body}>
-				<Container style={styles.container}>
+		<html>
+			<body style={styles.body}>
+				<div style={styles.container}>
 					{/* Header */}
-					<Section style={styles.header}>
-						<Heading as="h1" style={styles.logo}>
+					<div style={styles.header}>
+						<h1 style={styles.logo}>
 							Sportify
-						</Heading>
+						</h1>
 						<div style={styles.logoUnderline}></div>
-					</Section>
+					</div>
 
 					{/* Content */}
-					<Section style={styles.content}>
-						<Heading as="h2" style={styles.title}>
+					<div style={styles.content}>
+						<h2 style={styles.title}>
 							Bienvenue <span style={{ color: "#64D8CB" }}>{pseudo}</span> !
-						</Heading>
+						</h2>
 
-						<Text style={styles.text}>
+						<p style={styles.text}>
 							Nous sommes ravis de vous accueillir sur Sportify, votre nouveau
 							compagnon d'entraînement personnel. Prêt à commencer votre voyage
 							vers une meilleure forme physique ?
-						</Text>
+						</p>
 
-						<Section style={styles.card}>
+						<div style={styles.card}>
 							<div style={styles.cardHeader}>
 								<div style={styles.iconContainer}>
 									<img
@@ -49,38 +39,38 @@ const WelcomeMail = ({ pseudo }) => {
 										}}
 									/>
 								</div>
-								<Heading as="h3" style={styles.cardTitle}>
+								<h3 style={styles.cardTitle}>
 									Commencez dès maintenant
-								</Heading>
+								</h3>
 							</div>
 
-							<Text style={styles.cardText}>
+							<p style={styles.cardText}>
 								Connectez-vous à votre compte pour commencer à planifier vos
 								séances, suivre vos exercices et visualiser votre progression en
 								temps réel.
-							</Text>
+							</p>
 
-							<Link href="https://sportify.com/login" style={styles.button}>
+							<a href="https://sportify.com/login" style={styles.button}>
 								Se connecter →
-							</Link>
-						</Section>
+							</a>
+						</div>
 
-						<Text style={styles.disclaimer}>
+						<p style={styles.disclaimer}>
 							Si vous n'avez pas créé ce compte, vous pouvez ignorer cet email.
-						</Text>
-					</Section>
+						</p>
+					</div>
 
-					<Hr style={styles.divider} />
+					<hr style={styles.divider} />
 
 					{/* Footer */}
-					<Section style={styles.footer}>
-						<Text style={styles.footerText}>
+					<div style={styles.footer}>
+						<p style={styles.footerText}>
 							© {new Date().getFullYear()} Sportify. Tous droits réservés.
-						</Text>
-					</Section>
-				</Container>
-			</Body>
-		</Html>
+						</p>
+					</div>
+				</div>
+			</body>
+		</html>
 	);
 };
 
