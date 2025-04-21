@@ -8,6 +8,8 @@ import {
 import { useTheme } from "@/hooks/useTheme";
 import ActualDataCards from "./ActualDataCards";
 import PhysicalDataChart from "./PhysicalDataChart";
+import Loader from "../Loader";
+
 const DashboardSuivi = () => {
     const [showNewEntryModal, setShowNewEntryModal] = useState(false);
     const [physicalData, setPhysicalData] = useState([]);
@@ -83,6 +85,13 @@ const DashboardSuivi = () => {
         }
     };
 
+    if (isLoading) {
+        return (
+            <div className="flex items-center justify-center min-h-[200px]">
+                <Loader />
+            </div>
+        );
+    }
 
     if (physicalData.length === 0) {
         return (
@@ -106,7 +115,6 @@ const DashboardSuivi = () => {
             )}
             </>
         );
-
     }
 
     return (

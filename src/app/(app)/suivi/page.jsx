@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 import DashboardSuivi from '@/components/suivi/DashboardSuivi'
 const PageSuivi = () => {
   return (
@@ -16,7 +16,9 @@ const PageSuivi = () => {
     </div>
 
     {/* Graphique */}
-    <DashboardSuivi />
+    <Suspense fallback={<div>Loading...</div>}>
+        <DashboardSuivi />
+    </Suspense>
 </div>
   )
 }
