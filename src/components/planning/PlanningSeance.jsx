@@ -69,11 +69,7 @@ const PlanningSeance = () => {
 	// Mettre à jour une seance
 	const handleUpdateSeance = async (id, updatedSeance) => {
 		try {
-			const response = await putAPI_Seances(
-				id,
-				updatedSeance
-			);
-			console.log(response);
+			const response = await putAPI_Seances(id,updatedSeance);
 			setSeances(
 				seances.map((seance) =>
 					seance.id === id ? response : seance
