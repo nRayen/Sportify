@@ -11,7 +11,7 @@ const NewEntryModal = ({ isOpen, onClose, onSubmit }) => {
     e.preventDefault()
     const newEntry = {
       taille: parseInt(taille),
-      poids: parseFloat(poids)
+      poids: parseFloat(poids)  
     }
     onSubmit(newEntry)
     resetForm()
