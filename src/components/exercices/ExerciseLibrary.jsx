@@ -21,7 +21,9 @@ const ExerciseLibrary = () => {
 		const fetchPersonalExercises = async () => {
 			try {
 				setIsLoading(true);
-				const response = await fetch("/api/exercices/personal");
+				const response = await fetch("/api/exercices/personal", {
+					credentials: "include",
+				});
 				if (!response.ok) {
 					throw new Error(
 						"Erreur lors de la récupération des exercices personnels"
@@ -41,7 +43,9 @@ const ExerciseLibrary = () => {
 		const fetchPublicExercises = async () => {
 			try {
 				setIsLoading(true);
-				const response = await fetch("/api/exercices/public");
+				const response = await fetch("/api/exercices/public", {
+					credentials: "include",
+				});
 				if (!response.ok) {
 					throw new Error(
 						"Erreur lors de la récupération des exercices publics"
@@ -69,6 +73,7 @@ const ExerciseLibrary = () => {
 				headers: {
 					"Content-Type": "application/json",
 				},
+				credentials: "include",
 				body: JSON.stringify(newExercise),
 			});
 
@@ -94,6 +99,7 @@ const ExerciseLibrary = () => {
 				headers: {
 					"Content-Type": "application/json",
 				},
+				credentials: "include",
 				body: JSON.stringify({...updatedExercise, isPublic: updatedExercise.public}),
 			});
 
@@ -118,6 +124,7 @@ const ExerciseLibrary = () => {
 		try {
 			const response = await fetch(`/api/exercices/${id}`, {
 				method: "DELETE",
+				credentials: "include",
 			});
 
 			if (!response.ok) {
@@ -141,6 +148,7 @@ const ExerciseLibrary = () => {
 				headers: {
 					"Content-Type": "application/json",
 				},
+				credentials: "include",
 				body: JSON.stringify({ public: true }),
 			});
 

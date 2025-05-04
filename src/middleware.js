@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server'
 import { getSession } from '@/libs/session'
 
 // 1. Specify protected and public routes
-const protectedRoutes = ['/dashboard','/planning', '/exercices']
-const publicRoutes = ['/login', '/register, /session']
+const protectedRoutes = ['/dashboard','/planning', '/exercices', '/suivi', '/profile']
+const publicRoutes = ['/login', '/register', '/session', '/reset-password']
 
 export default async function middleware(req) {
   // 2. Check if the current route is protected or public

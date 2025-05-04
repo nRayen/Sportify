@@ -1,14 +1,15 @@
 import 'server-only'
 
 import { cookies, headers } from 'next/headers'
-import { decrypt } from '@/libs/session'
+import { decrypt, getSession } from '@/libs/session'
 import prisma from "@/libs/prisma";
 import { redirect } from 'next/navigation';
 
 export const verifySession = async () => {
-  const cookie = (await cookies()).get('session')?.value
-
-  if (!cookie) {
+  // Utiliser getSession qui vérifie à la fois cookie et header Authorization
+  const session = await getSession()
+  
+  if (!session) {
     const headerss = await headers()
     const pathname = headerss.get("x-invoke-path") || "/";
     if (pathname == "/") {
@@ -16,7 +17,6 @@ export const verifySession = async () => {
     }
     redirect('/login')
   }
-  const session = await decrypt(cookie)
 
   return { isAuth: true, userId: session.userId }
 }

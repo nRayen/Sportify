@@ -45,8 +45,8 @@ export async function POST(request) {
         // Vérifier si on autorise la connexion
         if (passwordCheck && userLoginCheck) {
 
-            // Créer la session
-            await createSession(userLoginCheck.id)
+            // Créer la session et récupérer le token
+            const token = await createSession(userLoginCheck.id)
 
             // Mettre à jour la date de dernière connexion
             const lastLogin = await prisma.user.update({
@@ -58,9 +58,9 @@ export async function POST(request) {
                 }
             })
 
-            // Renvoyer la réponse
+            // Renvoyer la réponse avec le token
             return NextResponse.json(
-                { message: "Connexion réussie"},
+                { message: "Connexion réussie", token: token },
                 { status: 201 } // Code HTTP : CREATION
             )
 
