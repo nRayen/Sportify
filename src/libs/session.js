@@ -1,6 +1,7 @@
 import 'server-only'
 import { SignJWT, jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
+import { headers } from 'next/headers'
 
 const secretKey = process.env.SESSION_SECRET
 const encodedKey = new TextEncoder().encode(secretKey)
@@ -8,14 +9,16 @@ const encodedKey = new TextEncoder().encode(secretKey)
 
 
 
-// Créer la session (enregistrer le cookie "session")
+// Créer la session et retourner le token JWT
 export async function createSession(userId) {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // Expire au bout de 7 jours
-  const session = await encrypt({ userId, expiresAt })
+  const token = await encrypt({ userId, expiresAt })
+  
+  // Pour la compatibilité avec l'ancienne version, on crée aussi un cookie
   const cookieStore = await cookies()
 
   try {
-    cookieStore.set('session', session, {
+    cookieStore.set('session', token, {
       httpOnly: true,
       secure: true,
       expires: expiresAt,
@@ -25,6 +28,9 @@ export async function createSession(userId) {
   } catch (error) {
     console.log(error)
   }
+
+  // Retourner le token pour l'utilisation dans React Native
+  return token
 }
 
 // Refresh la session
@@ -47,17 +53,37 @@ export async function updateSession() {
 }
 
 
-// Récuperer la session
-export async function getSession() {
-  const session = (await cookies()).get('session')?.value
-
-  if(!session) {
+// Récuperer la session à partir d'un token JWT
+export async function getSessionFromToken(token) {
+  if(!token) {
     return null
   }
 
-  const payload = await decrypt(session)
+  const payload = await decrypt(token)
   return payload
+}
 
+// Récuperer la session depuis le cookie ou le header Authorization
+export async function getSession() {
+  // Essayer d'abord de récupérer depuis le cookie
+  const session = (await cookies()).get('session')?.value
+  
+  if(session) {
+    const payload = await decrypt(session)
+    return payload
+  }
+  
+  // Si pas de cookie, essayer de récupérer depuis le header Authorization
+  const headersList = await headers()
+  const authHeader = headersList.get('Authorization')
+  
+  if(authHeader && authHeader.startsWith('Bearer ')) {
+    const token = authHeader.substring(7)
+    const payload = await decrypt(token)
+    return payload
+  }
+  
+  return null
 }
 
 
