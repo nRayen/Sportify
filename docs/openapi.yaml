@@ -1,0 +1,318 @@
+
+openapi: 3.0.0
+info:
+  title: Sportify API
+  description: Documentation complète de l’API Sportify
+  version: 1.0.0
+
+servers:
+  - url: https://ton-domaine.com
+
+paths:
+  /api/auth/login:
+    post:
+      summary: Connexion utilisateur
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userLogin:
+                  type: string
+                password:
+                  type: string
+              required: [userLogin, password]
+      responses:
+        '201':
+          description: Connexion réussie
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  token:
+                    type: string
+        '400':
+          description: Données de formulaire invalides
+        '401':
+          description: Nom d'utilisateur ou mot de passe incorrect
+        '500':
+          description: Erreur serveur
+
+  /api/auth/register:
+    post:
+      summary: Inscription utilisateur
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pseudo:
+                  type: string
+                firstname:
+                  type: string
+                lastname:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                birthday:
+                  type: string
+                  format: date
+                sex:
+                  type: string
+                  enum: [M, F, A]
+              required: [pseudo, firstname, lastname, email, password, birthday, sex]
+      responses:
+        '201':
+          description: Utilisateur créé avec succès
+        '400':
+          description: Données de formulaire invalides
+        '409':
+          description: Nom d'utilisateur ou email déjà existant
+        '500':
+          description: Erreur serveur
+
+  /api/auth/session:
+    get:
+      summary: Obtenir la session utilisateur actuelle
+      responses:
+        '200':
+          description: Session trouvée
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: string
+        '404':
+          description: Aucune session trouvée
+        '401':
+          description: Session invalide
+    delete:
+      summary: Déconnexion utilisateur
+      responses:
+        '200':
+          description: Session supprimée avec succès
+        '404':
+          description: Session non trouvée
+
+  /api/auth/password:
+    post:
+      summary: Envoi de lien de réinitialisation de mot de passe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required: [email]
+      responses:
+        '201':
+          description: Clé de réinitialisation créée avec succès
+        '400':
+          description: Données de formulaire invalides
+        '404':
+          description: Email non trouvé
+        '500':
+          description: Erreur serveur
+
+  /api/auth/password:
+    get:
+      summary: Vérification d'une clé de réinitialisation
+      parameters:
+        - name: key
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Clé valide
+        '400':
+          description: Aucune clé fournie
+        '404':
+          description: Clé invalide
+        '500':
+          description: Erreur serveur
+
+  /api/user:
+    get:
+      summary: Obtenir les informations utilisateur
+      responses:
+        '200':
+          description: Données utilisateur retournées
+        '500':
+          description: Erreur lors du chargement
+
+  /api/exercices:
+    post:
+      summary: Créer un exercice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                isPublic:
+                  type: boolean
+              required: [title, description, isPublic]
+      responses:
+        '200':
+          description: Exercice créé
+        '400':
+          description: Données invalides
+        '401':
+          description: Non authentifié
+        '500':
+          description: Erreur serveur
+
+  /api/exercices/{id}:
+    put:
+      summary: Modifier un exercice
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                isPublic:
+                  type: boolean
+              required: [title, description, isPublic]
+      responses:
+        '200':
+          description: Exercice modifié
+        '400':
+          description: Données invalides
+        '500':
+          description: Erreur serveur
+
+    delete:
+      summary: Supprimer un exercice
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Supprimé avec succès
+        '500':
+          description: Erreur serveur
+
+  /api/seances:
+    post:
+      summary: Créer une séance
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                date:
+                  type: string
+                  format: date
+                duration:
+                  type: integer
+                objective:
+                  type: string
+                exercises:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id_exercice:
+                        type: integer
+                      sets:
+                        type: integer
+                      reps:
+                        type: integer
+                      weight:
+                        type: number
+              required: [title, date, duration, objective, exercises]
+      responses:
+        '200':
+          description: Séance créée
+        '400':
+          description: Données invalides
+        '401':
+          description: Non authentifié
+        '500':
+          description: Erreur serveur
+
+    get:
+      summary: Récupérer les séances
+      responses:
+        '200':
+          description: Séances récupérées
+        '401':
+          description: Non authentifié
+        '500':
+          description: Erreur serveur
+
+  /api/physical-data:
+    post:
+      summary: Créer des données physiques
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                taille:
+                  type: integer
+                poids:
+                  type: number
+              required: [taille, poids]
+      responses:
+        '200':
+          description: Données physiques créées
+        '400':
+          description: Données invalides
+        '401':
+          description: Non authentifié
+        '500':
+          description: Erreur serveur
+
+    get:
+      summary: Obtenir les données physiques
+      responses:
+        '200':
+          description: Données récupérées
+        '401':
+          description: Non authentifié
+        '500':
+          description: Erreur serveur
